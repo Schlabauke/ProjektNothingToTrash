@@ -1,3 +1,18 @@
 .home-Sec {
-    height: 100vh;
+    .header-Art {
+        background: url("../../img/header_illustration.png") right no-repeat;
+        background-size: 40%;
+        padding: 15% 0 15% 5%;
+        div {
+            width: 50%;
+            margin: 0 5%;
+            h1 {
+                width: 100%;
+                margin: 0 0 2% 0;
+            }
+            p {
+                line-height: 1.5625rem;
+            }
+        }
+    }
 }
