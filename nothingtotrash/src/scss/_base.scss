@@ -43,6 +43,8 @@ body {
     max-width: 1440px;
     margin: 0 auto;
     color: $basicDarkFont;
+    background: Linear Gradient rgba(229, 239, 255, 1)
+        rgba(229, 239, 255, 0.2627) rgba(229, 239, 255, 0);
 }
 .wrapper {
     width: 90%;
@@ -51,7 +53,8 @@ body {
 a {
     text-decoration: none;
     color: $basicDarkFont;
+    font-size: 1.125rem;
 }
 p {
-    font-size: 1rem;
+    font-size: 1.125rem;
 }

@@ -1,5 +1,14 @@
 // sass --watch assets/scss/main.scss assets/css/style.css
 @import "_base.scss";
-@import "_layout.scss";
+
+// Components
+@import "../components/nav/nav.scss";
+
+// Pages
+@import "../pages/home/home.scss";
+@import "../pages/login/login.scss";
+@import "../pages/marktplatz/marktplatz.scss";
+@import "../pages/ueberuns/ueberuns.scss";
+
 @import "_components.scss";
 @import "mediaQueries.scss";
