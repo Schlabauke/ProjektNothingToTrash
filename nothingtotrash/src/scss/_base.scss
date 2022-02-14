@@ -36,13 +36,19 @@ $basicWhite: rgba(255, 255, 255, 1);
     box-sizing: border-box;
 }
 html {
-    font-size: 100%;
+    font-size: calc(8px + (16 - 8) * ((100vw - 320px) / (1600 - 320)));
     font-family: "Roboto", sans-serif;
 }
 body {
-    max-width: 1440px;
+    // max-width: 1440px;
     margin: 0 auto;
     color: $basicDarkFont;
+    background: linear-gradient(
+        180deg,
+        #e5efff 0%,
+        rgba(229, 239, 255, 0.262661) 50vh,
+        rgba(229, 239, 255, 0) 100vh
+    );
 }
 .wrapper {
     width: 90%;
@@ -51,7 +57,18 @@ body {
 a {
     text-decoration: none;
     color: $basicDarkFont;
+    font-size: 1.125rem;
+    transition: all 0.2s;
+    &:hover {
+        opacity: 0.8;
+    }
 }
 p {
-    font-size: 1rem;
+    font-size: 1.125rem;
+    margin: 0 0 5% 0;
+}
+h1 {
+    font-weight: bold;
+    font-size: 5rem;
+    line-height: 6rem;
 }

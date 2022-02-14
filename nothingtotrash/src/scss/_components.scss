@@ -3,4 +3,11 @@
 buttons / navbars / popups / ...
 ##################################
 */
-/* # # # # #  NAV # # # # # */
+.btn-primary {
+    background-color: $basicButtonBlue-full;
+    padding: 20px 50px;
+    color: $basicWhite;
+    border-radius: 5px;
+    font-size: 0.875rem;
+    display: inline-block;
+}
