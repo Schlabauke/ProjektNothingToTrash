@@ -1,78 +1,87 @@
 const express = require('express')
-
 const app = express()
 const dotenv = require('dotenv')
 const formidable = require("formidable")
 const cors = require('cors')
-const {
-    createNewUser,
-    checkEmailExists,
-    addProduct
-} = require('./db_access/user_dao')
+const formidableMiddleware = require('express-formidable');
+const { registerUser } = require('./services/registerUser')
+const { LoginUser } = require('./services/loginUser')
+
 
 // Allgemeine Use
+dotenv.config()
 app.use(cors())
 app.use(express.json())
-dotenv.config()
+app.use(formidableMiddleware());
 
 
+//POST-Routen
+app.post("/api/users/register", (req, res) => {
+    //Daten aus Inputfeld
+    const username = req.body.username
+    const email = req.body.email
+    const password = req.body.password
 
-//Routen
-app.post("/register", (req, res) => {
-    //User anlegen
-    const user = {
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-    }
-    console.log(user) //kommt an
+    //registerUser 
+    registerUser({ username, email, password })
+        .then(() => {
+            res.sendStatus(201)
+        })
 
-    // checkEmailExists({ username, email })
-    //     .then((username, email) => {
-    //         console.log(username, email)
-    //     })
-    //    .catch((err) => {
-    //         console.log('err on Registrierung:', err)
-    //     })
-    //greift auf checkEmail in userDao zu, User wird angelegt, wenn Email nicht schon existiert
-    // was soll jetzt passieren? 
+        .catch((err) => {
+            console.log('err on Registrierung:', err)
+        })
 
+}) //funktioniert
+
+app.post("/api/users/login", (req, res) => {
+    //daten aus Input-Feldern
+    const email = req.body.email
+    const password = req.body.password
+
+    LoginUser({ email, password })
+        .then((token) => {
+            res.send({ token })
+        })
+        .catch((err) => {
+            console.log('Err bei LogIn', err)
+            res.status(400).send({ err: err.message })
+        })
+    console.log(email, password);
 })
 
-app.post("/login", (req, res) => {
-    res.send("Logged") //Token generieren 
-    //richtiger email und pwHash schauen
-    console.log(req.body);
-})
-
-app.post('/addProduct', (req, res) => {
+app.post('/api/products/addProduct', (req, res, next) => {
     const form = formidable({ multiples: true });
+
     form.parse(req, (err, fields, files) => {
         if (err) {
-            console.log("Error");
+            next(err);
             return;
+        } else {
+            const newProduct = {
+                AnzeigenTyp: fields.AnzeigenTyp,
+                Lieferung: fields.Lieferung,
+                Titel: fields.Titel,
+                Beschreibung: fields.Beschreibung,
+                Bild: files.Bild,
+                Anzahl: fields.Anzahl,
+                Preis: fields.Preis,
+                Festpreis: false,
+                VB: false,
+                zuVerschenken: false,
+                Kategorie: fields.Kategorie,
+                PLZ: fields.PLZ,
+                Strasse: fields.Strasse,
+                Name: fields.Name,
+                Telefonnummer: fields.Telefonnummer
+            }
+            console.log('Fields:', fields, files, newProduct)
         }
-        const newProduct = {
-            AnzeigenTyp: '',
-            Lieferung: '',
-            Titel: '',
-            Beschreibung: '',
-            Bild: '',
-            Anzahl: '',
-            Preis: '€',
-            Festpreis: true,
-            VB: false,
-            zuVerschenken: false,
-            Kategorie: '',
-            PLZ: '',
-            Strasse: '',
-            Name: '',
-            Telefonnummer: ''
-        }
-        console.log(newProduct)
-        addProduct(newProduct) //greift auf addProduct in userDao zu
     })
 })
+//funktioniert nicht!! --> evtl auslagern?
+
+
 
 //GET-Routen
 
@@ -82,17 +91,16 @@ app.get('/', (req, res) => {
 app.get('/login/myFavorites', (req, res) => {
 
 })
-app.get('login/mySoldProducts', (req, res) => {
+app.get('/login/mySoldProducts', (req, res) => {
 
 })
-app.get('/allProducts', (req, res) => {
+app.get('/api/products/allProducts', (req, res) => {
 
 })
 
 
 const PORT = 3001
 app.listen(PORT, () => console.log('Listening on Port,', PORT))
-
 
 
 

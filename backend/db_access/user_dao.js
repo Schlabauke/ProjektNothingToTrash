@@ -8,18 +8,20 @@ async function createNewUser(user) {
 }
 //Check Name or email exist, User vorhanden in Datenbank 
 async function checkEmailExists(email) {
+    console.log(email);
     const db = await _getDB()
     const user = await db.collection('users').findOne({
         $or: [
             { email: email }
         ]
     })
-    if (!user) {
-        insertOne(email)
-    } else {
-        console.log("user Exist");
-    }
     return user
+}
+//getallProducts
+async function gettAllProducts() {
+    const db = await _getDB()
+    const allProducts = await db.collection('products').find().toArray()
+    return allProducts
 }
 
 //addProduct
@@ -32,5 +34,7 @@ async function addProduct(newProduct) {
 module.exports = {
     createNewUser,
     checkEmailExists,
-    addProduct
+    addProduct,
+    gettAllProducts
 }
+
