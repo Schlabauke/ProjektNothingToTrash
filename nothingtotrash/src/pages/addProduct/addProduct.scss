@@ -39,6 +39,18 @@
                 padding: 5%;
                 border-radius: 5px;
             }
+            input[type="radio"] {
+                -moz-appearance: None;
+                -webkit-appearance: none;
+                background: $basicWhite;
+                border-radius: 50%;
+                border: 1px solid #c4c4c4;
+            }
+
+            input[type="radio"]:checked {
+                background: $loginButton;
+            }
+
             label {
                 width: 10%;
             }
