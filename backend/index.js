@@ -11,8 +11,9 @@ const { LoginUser } = require('./services/loginUser')
 // Allgemeine Use
 dotenv.config()
 app.use(cors())
+app.use(express.static('uploads'))
 app.use(express.json())
-app.use(formidableMiddleware());
+
 
 
 //POST-Routen
@@ -51,19 +52,23 @@ app.post("/api/users/login", (req, res) => {
 })
 
 app.post('/api/products/addProduct', (req, res, next) => {
-    const form = formidable({ multiples: true });
 
+    const form = formidable({ multiples: true, uploadDir: 'uploads' });
+    console.log('In api/products/addProduct')
     form.parse(req, (err, fields, files) => {
+        console.log('In form parse')
+
         if (err) {
-            next(err);
+            console.log(err);
             return;
         } else {
-            const newProduct = {
+            console.log('in else')
+            let newProduct = {
                 AnzeigenTyp: fields.AnzeigenTyp,
                 Lieferung: fields.Lieferung,
                 Titel: fields.Titel,
                 Beschreibung: fields.Beschreibung,
-                Bild: files.Bild,
+                Bild: files.Bild ? files.Bild.newFilename : 'leerer string',
                 Anzahl: fields.Anzahl,
                 Preis: fields.Preis,
                 Festpreis: false,
@@ -75,8 +80,10 @@ app.post('/api/products/addProduct', (req, res, next) => {
                 Name: fields.Name,
                 Telefonnummer: fields.Telefonnummer
             }
-            console.log('Fields:', fields, files, newProduct)
+            console.log('after newProduct')
+            res.send(newProduct)
         }
+        console.log('after if/else')
     })
 })
 //funktioniert nicht!! --> evtl auslagern?
