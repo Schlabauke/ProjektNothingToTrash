@@ -3,7 +3,6 @@ const app = express()
 const dotenv = require('dotenv')
 const formidable = require("formidable")
 const cors = require('cors')
-const formidableMiddleware = require('express-formidable');
 const { registerUser } = require('./services/registerUser')
 const { LoginUser } = require('./services/loginUser')
 
@@ -26,13 +25,11 @@ app.post("/api/users/register", (req, res) => {
     //registerUser 
     registerUser({ username, email, password })
         .then(() => {
-            res.sendStatus(201)
+            res.sendStatus(201, 'User Created')
         })
-
         .catch((err) => {
-            console.log('err on Registrierung:', err)
+            res.status(400).send('Sorry!But this User already exists!')
         })
-
 }) //funktioniert
 
 app.post("/api/users/login", (req, res) => {
@@ -47,9 +44,8 @@ app.post("/api/users/login", (req, res) => {
         .catch((err) => {
             console.log('Err bei LogIn', err)
             res.status(400).send({ err: err.message })
-        })
-    console.log(email, password);
-})
+        });
+})//funktioniert
 
 app.post('/api/products/addProduct', (req, res, next) => {
 
@@ -86,7 +82,7 @@ app.post('/api/products/addProduct', (req, res, next) => {
         console.log('after if/else')
     })
 })
-//funktioniert nicht!! --> evtl auslagern?
+//funktioniert
 
 
 
