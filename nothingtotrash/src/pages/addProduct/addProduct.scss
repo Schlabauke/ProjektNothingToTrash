@@ -1,0 +1,76 @@
+.addProduct-Sec {
+    background: url("../../img/addProduct.svg") center no-repeat;
+    background-size: 100%;
+    padding: 0 0 10% 0;
+    margin: 10% 0 0 0;
+    form {
+        .formWrap-Div {
+            width: 65%;
+            display: flex;
+            align-items: center;
+            margin: 5% 0 5% 10%;
+            p {
+                width: 25%;
+            }
+            input,
+            textarea,
+            select {
+                margin: 0 5px;
+                background-color: $formBackground-light;
+                border: none;
+                border-radius: 5px;
+                padding: 1%;
+            }
+            #ortInput {
+                width: 65%;
+            }
+            input[type="text"],
+            textarea {
+                width: 75%;
+            }
+            input[type="number"] {
+                width: 10%;
+            }
+            input[type="file"]::file-selector-button {
+                border: none;
+                cursor: pointer;
+                background-color: $basicButtonBlue-lighter;
+                color: $basicWhite;
+                padding: 5%;
+                border-radius: 5px;
+            }
+            input[type="radio"] {
+                -moz-appearance: None;
+                -webkit-appearance: none;
+                background: $basicWhite;
+                border-radius: 50%;
+                border: 1px solid #c4c4c4;
+            }
+
+            input[type="radio"]:checked {
+                background: $loginButton;
+            }
+
+            label {
+                width: 10%;
+            }
+            .lastLabel {
+                width: fit-content;
+            }
+        }
+        .formWrapPersonal-Div {
+            margin: 20% 0 0 0;
+        }
+        .formSubmit {
+            text-align: center;
+            cursor: pointer;
+            display: block;
+            border: none;
+            margin: 0 auto;
+            transition: all 0.2s;
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
