@@ -1,3 +1,5 @@
+import { data } from "../../data";
+
 const Home = () => {
     return (
         <section className="home-Sec">
@@ -12,7 +14,7 @@ const Home = () => {
                         Delfine verfangen sich in alten Fischernetzen. Hilf mit
                         Müll zu reduzieren und trashnothing.
                     </p>
-                    <a className="btn-primary" href="/">
+                    <a className="btn-primary" href="/addproduct">
                         Starte jetzt!
                     </a>
                 </div>
@@ -80,6 +82,15 @@ const Home = () => {
                     </div>
                     <img src="img/blueImg2.png" alt="blueImg2" />
                 </div>
+            </article>
+            <article className="people-Art">
+                <h2>Von echten Menschen unterstützt</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Risus faucibus egestas neque, quis nunc in turpis cursus
+                    eget.
+                </p>
+                <img src="img/people.svg" alt="people" />
             </article>
         </section>
     );

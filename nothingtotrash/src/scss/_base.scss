@@ -36,7 +36,7 @@ $basicWhite: rgba(255, 255, 255, 1);
     box-sizing: border-box;
 }
 html {
-    font-size: calc(8px + (16 - 8) * ((100vw - 320px) / (1440 - 320)));
+    font-size: calc(5px + (16 - 7) * ((100vw - 320px) / (1440 - 320)));
     font-family: "Roboto", sans-serif;
 }
 body {
@@ -62,7 +62,6 @@ a {
 }
 p {
     font-size: 1.125rem;
-    
 }
 h1 {
     font-weight: bold;

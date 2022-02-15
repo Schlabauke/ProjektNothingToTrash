@@ -10,6 +10,7 @@ import Marktplatz from "./pages/marktplatz/Marktplatz";
 import Ueberuns from "./pages/ueberuns/Ueberuns";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import AddProduct from "./pages/addProduct/AddProduct";
 
 function App() {
     return (
@@ -22,13 +23,13 @@ function App() {
                     <Route path="/ueberuns" element={<Ueberuns />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/addproduct" element={<AddProduct />} />
                     {/* <Route path="/details/:id" element={<Detail />} /> */}
                 </Routes>
                 <Footer />
             </Router>
             <FooterEnd />
         </>
-
     );
 }
 

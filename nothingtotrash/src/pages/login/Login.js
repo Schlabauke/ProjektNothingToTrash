@@ -1,7 +1,25 @@
 const Login = () => {
     return (
         <section className="login-Sec">
-            <h1>login</h1>
+            <div>
+                <h2>Registriere Dich & nimm Teil</h2>
+                <article>
+                    <h2>Mit Email anmelden</h2>
+                    <form>
+                        <input type="email" name="email" placeholder="Email" />
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Passwort"
+                        />
+                        <input
+                            className="btn-primary"
+                            type="submit"
+                            value="Registrieren"
+                        />
+                    </form>
+                </article>
+            </div>
         </section>
     );
 };
