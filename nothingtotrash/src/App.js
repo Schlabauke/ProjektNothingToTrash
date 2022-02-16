@@ -4,6 +4,7 @@ import Nav from "./components/nav/Nav";
 import Footer from "./components/footer/Footer";
 import FooterEnd from "./components/footerEnd/FooterEnd";
 
+
 // Pages
 import Home from "./pages/home/Home";
 import Marktplatz from "./pages/marktplatz/Marktplatz";
