@@ -1,4 +1,5 @@
 .home-Sec {
+    margin: 10% 0 0 0;
     .header-Art {
         background: url("../../img/header_illustration.png") right no-repeat;
         background-size: 35%;
@@ -100,6 +101,21 @@
                     background-color: $basicButtonOrange-full;
                 }
             }
+        }
+    }
+    .people-Art {
+        text-align: center;
+        h2 {
+            margin: 1% 0;
+        }
+        p {
+            display: block;
+            width: 40%;
+            margin: 0 auto;
+        }
+        img {
+            width: 100%;
+            margin: 5% 0 -8% 0;
         }
     }
 }
