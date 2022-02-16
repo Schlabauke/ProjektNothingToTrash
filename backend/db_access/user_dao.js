@@ -8,7 +8,6 @@ async function createNewUser(user) {
 }
 //Check Name or email exist, User vorhanden in Datenbank 
 async function checkEmailExists(email) {
-    console.log(email);
     const db = await _getDB()
     const user = await db.collection('users').findOne({
         $or: [
@@ -18,9 +17,16 @@ async function checkEmailExists(email) {
     return user
 }
 //getallProducts
-async function gettAllProducts() {
+async function getAllProducts() {
     const db = await _getDB()
-    const allProducts = await db.collection('products').find().toArray()
+    const allProducts = await db.collection('products').find().toArray();
+    
+    return allProducts
+}
+async function getAllUsers() {
+    const db = await _getDB()
+    const allProducts = await db.collection('users').find().toArray();
+    
     return allProducts
 }
 
@@ -35,6 +41,7 @@ module.exports = {
     createNewUser,
     checkEmailExists,
     addProduct,
-    gettAllProducts
+    getAllProducts,
+    getAllUsers
 }
 

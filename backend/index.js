@@ -5,7 +5,8 @@ const formidable = require("formidable")
 const cors = require('cors')
 const { registerUser } = require('./services/registerUser')
 const { LoginUser } = require('./services/loginUser')
-const { addProduct } = require('./db_access/user_dao')
+const { addProduct, getAllProducts , getAllUsers} = require('./db_access/user_dao')
+
 
 
 // Allgemeine Use
@@ -51,15 +52,12 @@ app.post("/api/users/login", (req, res) => {
 app.post('/api/products/addProduct', (req, res, next) => {
 
     const form = formidable({ multiples: true, uploadDir: 'uploads' });
-    console.log('In api/products/addProduct')
     form.parse(req, (err, fields, files) => {
-        console.log('In form parse')
-
+       
         if (err) {
             console.log(err);
             return;
         } else {
-            console.log('in else')
             let newProduct = {
                 AnzeigenTyp: fields.AnzeigenTyp,
                 Lieferung: fields.Lieferung,
@@ -77,20 +75,21 @@ app.post('/api/products/addProduct', (req, res, next) => {
                 Name: fields.Name,
                 Telefonnummer: fields.Telefonnummer
             }
-            
+        
             addProduct(newProduct)
-            .then((newProduct)=>{
-                res.send(newProduct)
+            .then(()=>{
+                res.send(
+                    'Produkt wurde hinzugefügt')
             })
             .catch((err)=>{
                 console.log('Err in AddProduct', err)
-            res.status(400).send({ err: err.message })
+            res.send({ err: err.message })
             })
             
         }
     })
 })
-//funktioniert
+
 
 
 
@@ -100,15 +99,25 @@ app.get('/', (req, res) => {
 
 })
 
-app.get('/login/myFavorites', (req, res) => {
-
-})
-
 app.get('/login/mySoldProducts', (req, res) => {
 
 })
 
 app.get('/api/products/allProducts', (req, res) => {
+    console.log("davor");
+    getAllProducts()
+    .then((allProducts)=>{
+    console.log(allProducts)
+    res.send(allProducts)
+    })
+    .catch((err)=>{
+        console.log('Err in GET/allProducts', err)
+        res.send({ err: err.message })
+    })
+})
+
+app.get('/api/products/allProducts/:id',(res,req)=>{
+    let id = req.params.id
 
 })
 
