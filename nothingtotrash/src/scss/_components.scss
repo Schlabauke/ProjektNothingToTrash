@@ -4,6 +4,7 @@ buttons / navbars / popups / ...
 ##################################
 */
 .btn-primary {
+    cursor: pointer;
     background-color: $basicButtonBlue-full;
     padding: 20px 50px;
     color: $basicWhite;
@@ -11,4 +12,111 @@ buttons / navbars / popups / ...
     font-size: 0.875rem;
     margin: 2% 0;
     display: inline-block;
+}
+.productsHeader-Art {
+    text-align: center;
+    margin: 10% 0 5% 0;
+    h1 {
+        margin: 0 auto;
+        width: 60%;
+    }
+    input {
+        width: 25%;
+        margin: 5% auto 1% auto;
+        display: block;
+    }
+}
+
+aside {
+    width: 15%;
+    margin: 0 0 10% 5%;
+    h4 {
+        margin: 5% 0;
+    }
+    .asideGrid-Div {
+        display: grid;
+        gap: 10px 0;
+        grid-template-columns: repeat(2, 1fr);
+        margin: 0 0 10% 0;
+        button {
+            border: none;
+            background: none;
+            justify-self: start;
+            font-size: 0.875rem;
+            line-height: 1rem;
+        }
+        p {
+            justify-self: end;
+            font-weight: bold;
+            font-size: 0.75rem;
+            line-height: 0.875rem;
+            color: $basicButtonBlue-full;
+        }
+    }
+    .asideBranding-Div,
+    .asideRating-Div {
+        margin: 0 0 10% 0;
+
+        div {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            input {
+                margin: 0 5% 0 0;
+            }
+            input[type="checkbox"] {
+                -moz-appearance: None;
+                -webkit-appearance: none;
+                background: $basicWhite;
+                border: 1px solid #c4c4c4;
+                padding: 8px;
+            }
+            input[type="checkbox"]:checked {
+                background: $basicButtonBlue-full;
+                padding: 8px;
+            }
+            label {
+                .yellowStar {
+                    color: rgba(255, 186, 73, 1);
+                }
+            }
+        }
+    }
+    .asidePrice-Div {
+        #priceSlider {
+            width: 100%;
+            margin: 0;
+        }
+        .priceFlex-Div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5% 0;
+            div {
+                width: 40%;
+                p {
+                    font-weight: bold;
+                    font-size: 0.75rem;
+                    line-height: 0.875rem;
+                    margin: 0 0 5% 0;
+                }
+                input {
+                    width: 100%;
+                    padding: 10% 5%;
+                    margin: 0;
+                }
+            }
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 20px 0;
+            border: none;
+            font-weight: bold;
+            font-size: 0.9375rem;
+            transition: all 0.2s;
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
 }

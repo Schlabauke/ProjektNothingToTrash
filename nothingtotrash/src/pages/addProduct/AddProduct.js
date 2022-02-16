@@ -45,13 +45,13 @@ const AddProduct = () => {
                     <input type="number" name="price" />
                     <label htmlFor="price">EUR</label>
 
-                    <input type="radio" name="priceKind" value="suche" />
+                    <input type="radio" name="priceKind" value="Festpreis" />
                     <label htmlFor="priceKind">Festpreis</label>
 
-                    <input type="radio" name="priceKind" value="suche" />
+                    <input type="radio" name="priceKind" value="VB" />
                     <label htmlFor="priceKind">VB</label>
 
-                    <input type="radio" name="priceKind" value="suche" />
+                    <input type="radio" name="priceKind" value="Verschenken" />
                     <label className="lastLabel" htmlFor="priceKind">
                         Zu Verschenken
                     </label>
