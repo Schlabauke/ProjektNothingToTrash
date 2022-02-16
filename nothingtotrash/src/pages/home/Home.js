@@ -1,6 +1,6 @@
+import { NavLink } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
 import FooterEnd from "../../components/footerEnd/FooterEnd";
-import { data } from "../../data";
 
 const Home = () => {
     return (
@@ -18,9 +18,9 @@ const Home = () => {
                             Fischernetzen. Hilf mit Müll zu reduzieren und
                             trashnothing.
                         </p>
-                        <a className="btn-primary" href="/addproduct">
+                        <NavLink className="btn-primary" to="/addproduct">
                             Starte jetzt!
-                        </a>
+                        </NavLink>
                     </div>
                 </article>
                 <article className="picsGrid-Art">

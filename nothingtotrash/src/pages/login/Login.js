@@ -1,27 +1,31 @@
-import { useState } from "react";
-
+import axios from "axios";
+import { useState, useContext } from "react";
+import { newToken } from "../../App";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { token, setToken } = useContext(newToken);
 
     const loginFetch = (e) => {
         e.preventDefault();
-        const User = {
+        const user = {
             email,
             password,
         };
-        fetch("http://localhost:3001/api/users/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(User),
-        }).then((res) => {
-            console.log(res);
-            if (res.ok) {
-                window.location.replace("/login");
-            }
-        });
+        axios
+            .post("http://localhost:3001/api/users/login", {
+                email: user.email,
+                password: user.password,
+            })
+            .then((res) => {
+                if (res.data.token) {
+                    setToken(res.data.token);
+                    console.log(res);
+                } else {
+                    console.log(res);
+                    console.log("kacke");
+                }
+            });
     };
 
     return (
