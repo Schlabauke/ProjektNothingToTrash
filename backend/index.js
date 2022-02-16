@@ -5,6 +5,7 @@ const formidable = require("formidable")
 const cors = require('cors')
 const { registerUser } = require('./services/registerUser')
 const { LoginUser } = require('./services/loginUser')
+const { addProduct } = require('./db_access/user_dao')
 
 
 // Allgemeine Use
@@ -76,10 +77,17 @@ app.post('/api/products/addProduct', (req, res, next) => {
                 Name: fields.Name,
                 Telefonnummer: fields.Telefonnummer
             }
-            console.log('after newProduct')
-            res.send(newProduct)
+            
+            addProduct(newProduct)
+            .then((newProduct)=>{
+                res.send(newProduct)
+            })
+            .catch((err)=>{
+                console.log('Err in AddProduct', err)
+            res.status(400).send({ err: err.message })
+            })
+            
         }
-        console.log('after if/else')
     })
 })
 //funktioniert
@@ -91,12 +99,15 @@ app.post('/api/products/addProduct', (req, res, next) => {
 app.get('/', (req, res) => {
 
 })
+
 app.get('/login/myFavorites', (req, res) => {
 
 })
+
 app.get('/login/mySoldProducts', (req, res) => {
 
 })
+
 app.get('/api/products/allProducts', (req, res) => {
 
 })
