@@ -20,6 +20,10 @@ buttons / navbars / popups / ...
         margin: 0 auto;
         width: 60%;
     }
+    p {
+        margin: 2% auto;
+        width: 60%;
+    }
     input {
         width: 25%;
         margin: 5% auto 1% auto;
@@ -27,6 +31,10 @@ buttons / navbars / popups / ...
     }
 }
 
+.articleAndFilterWrap {
+    display: flex;
+    flex-wrap: wrap;
+}
 aside {
     width: 15%;
     margin: 0 0 10% 5%;
@@ -56,7 +64,6 @@ aside {
     .asideBranding-Div,
     .asideRating-Div {
         margin: 0 0 10% 0;
-
         div {
             display: flex;
             align-items: center;
