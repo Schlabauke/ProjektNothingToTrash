@@ -1,6 +1,12 @@
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { newToken } from "../../App";
 
 const Nav = () => {
+    const { token, setToken } = useContext(newToken);
+    const logoutFunction = () => {
+        setToken(null);
+    };
     return (
         <nav>
             <div>
@@ -12,10 +18,24 @@ const Nav = () => {
             </div>
 
             <div>
-                <NavLink to="/login">Log In</NavLink>
-                <NavLink className="register-btn" to="/register">
-                    Registriere Dich
-                </NavLink>
+                {token ? (
+                    <NavLink to="/wishlist">Wunschliste</NavLink>
+                ) : (
+                    <NavLink to="/login">Log In</NavLink>
+                )}
+                {token ? (
+                    <NavLink
+                        onClick={logoutFunction}
+                        className="register-btn"
+                        to="/login"
+                    >
+                        Logout
+                    </NavLink>
+                ) : (
+                    <NavLink className="register-btn" to="/register">
+                        Registriere Dich
+                    </NavLink>
+                )}
             </div>
         </nav>
     );

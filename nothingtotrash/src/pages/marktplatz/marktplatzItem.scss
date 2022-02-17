@@ -1,37 +1,38 @@
-.marktplatzitem {
-    width: 85%;
-    display: grid;
-    align-items: center;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
-    border-radius: 5px;
-    overflow: hidden;
-    border: 1px solid rgba(209, 209, 209, 1);
-    margin: 0 0 5% 5%;
-    img{
-        width: 100%;
-    }
-    .text{
-        div{
-            margin: 5% 0;
-            p{
-                width: 50%;
-                display: inline-block;
-                margin: 2% 0;
-            }
+.marktlist {
+    width: 60%;
+    .marktplatzitem {
+        display: grid;
+        align-items: center;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 50px;
+        border-radius: 5px;
+        overflow: hidden;
+        border: 1px solid rgba(209, 209, 209, 1);
+        margin: 0 0 5% 5%;
+        img {
+            width: 100%;
+        }
+        .text {
+            div {
+                margin: 5% 0;
+                p {
+                    width: 50%;
+                    display: inline-block;
+                    margin: 2% 0;
+                }
             }
         }
-        .btn-primary{
-            width: 80%;
-            margin: 2% auto;
+        .btn-primary {
+            width: 90%;
+            margin: 5% auto;
             display: block;
             text-align: center;
             font-weight: bold;
             font-size: 0.9rem;
-        &:nth-of-type(2){
-            background-color: rgba(245, 245, 245, 1);
-            color: $basicDarkFont;
+            &:nth-of-type(2) {
+                background-color: rgba(245, 245, 245, 1);
+                color: $basicDarkFont;
+            }
         }
-
-}   
+    }
 }
