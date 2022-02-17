@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const { checkEmailExists } = require('../db_access/user_dao')
 const { hashPassword } = require('../utility/pwHash')
-const ObjectId = require('mongodb').ObjectId
+
 
 //generiere Token
 const generateToken = (user) => {

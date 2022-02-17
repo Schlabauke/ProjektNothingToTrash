@@ -26,9 +26,9 @@ async function getAllProducts() {
 
 async function getAllUsers() {
     const db = await _getDB()
-    const allProducts = await db.collection('users').find().toArray();
+    const allUsers = await db.collection('users').find().toArray();
     
-    return allProducts
+    return allUsers
 }
 
 //addProduct

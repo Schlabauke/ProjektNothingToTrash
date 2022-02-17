@@ -7,7 +7,8 @@ const cors = require('cors')
 const { registerUser } = require('./services/registerUser')
 const { LoginUser } = require('./services/loginUser')
 const { addProduct, getAllProducts } = require('./db_access/user_dao')
-const { createFavorites } = require('./services/createFavorites')
+const { deleteFavorite  } = require('./services/deleteFavorite')
+const { addFavorite, } = require('./services/addFavoritetoUser')
 
 // Allgemeine Use
 dotenv.config()
@@ -23,6 +24,7 @@ app.post("/api/users/register", (req, res) => {
     const email = req.body.email
     const password = req.body.password
 
+  
     //registerUser 
     registerUser({ username, email, password })
         .then(() => {
@@ -95,14 +97,27 @@ app.post('/api/favorites',(req,res)=>{
     const productObjId = req.body.productObjId
     const userObjId = req.body.userObjId
     console.log("productObjId:",productObjId);
-    createFavorites(productObjId)
-    .catch((err) =>{
-        console.log(err,'This ProductObjId already exist in Your Favorites')
+    addFavorite(userObjId, productObjId)
+    .then((userFavorite)=>{
+    res.send('Favorit wurde hinzugefügt', userFavorite)
     })
+    .catch((err) =>{
+        console.log(err,'Something went wrong at addFavorite')
+    }) 
 
 })
 
-
+app.delete('/api/favorites',(req,res)=>{
+    const productObjId = req.body.productObjId
+    const userObjId = req.body.userObjId
+    deleteFavorite(userObjId, productObjId)
+    .then((deleteFavorite)=>{
+        res.send('Favorit wurde entfernt', deleteFavorite)
+    })
+    .catch((err) =>{
+        console.log(err,'Something went wrong at deleteFavorite')
+    }) 
+})
 
 //GET-Routen
 
@@ -126,12 +141,6 @@ const PORT = 3001
 app.listen(PORT, () => console.log('Listening on Port,', PORT))
 
 
-
-// Object_id vom Produkt für Favoriten 
-// insertOne(favorites),anhand der userObjId + ProductObjId
-//post('/api/favorites/)--> was wird dem Frontend senden
-//get('/api/myfavorites')send( favorites of userObjId)
-/* Produkt in allproducts,gleiche product in collection 'favorites' + userObjId */
 
 
 
