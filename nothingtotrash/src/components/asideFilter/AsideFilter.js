@@ -1,4 +1,16 @@
+import { useState } from "react";
+import { FaStar, FaRegStar } from "react-icons/fa";
+import { Range, getTrackBackground } from "react-range";
+
+const STEP = 1;
+const MIN = 0;
+const MAX = 1000;
+
 const AsideFilter = () => {
+    const [values, setValues] = useState([0, 500]);
+    const resetValue = () => {
+        setValues([0, 500]);
+    };
     return (
         <aside>
             <form>
@@ -14,7 +26,6 @@ const AsideFilter = () => {
                     <button>Kategorie Name</button>
                     <p>12</p>
                 </div>
-
                 {/* Marken */}
                 <h4>Marken</h4>
                 <div className="asideBranding-Div">
@@ -42,51 +53,51 @@ const AsideFilter = () => {
                     <div>
                         <input type="checkbox" name="five" id="five" />
                         <label htmlFor="five">
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
+                            <FaStar className="yellowStar" />
+                            <FaStar className="yellowStar" />
+                            <FaStar className="yellowStar" />
+                            <FaStar className="yellowStar" />
+                            <FaStar className="yellowStar" />
                         </label>
                     </div>
                     <div>
                         <input type="checkbox" name="four" id="four" />
                         <label htmlFor="four">
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xtluxl-star-thin"></i>
+                            <FaStar className="yellowStar" />
+                            <FaStar className="yellowStar" />
+                            <FaStar className="yellowStar" />
+                            <FaStar className="yellowStar" />
+                            <FaRegStar />
                         </label>
                     </div>
                     <div>
                         <input type="checkbox" name="three" id="three" />
                         <label htmlFor="three">
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xtluxl-star-thin"></i>
-                            <i className="fi-xtluxl-star-thin"></i>
+                            <FaStar className="yellowStar" />
+                            <FaStar className="yellowStar" />
+                            <FaStar className="yellowStar" />
+                            <FaRegStar />
+                            <FaRegStar />
                         </label>
                     </div>
                     <div>
                         <input type="checkbox" name="two" id="two" />
                         <label htmlFor="two">
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xtluxl-star-thin"></i>
-                            <i className="fi-xtluxl-star-thin"></i>
-                            <i className="fi-xtluxl-star-thin"></i>
+                            <FaStar className="yellowStar" />
+                            <FaStar className="yellowStar" />
+                            <FaRegStar />
+                            <FaRegStar />
+                            <FaRegStar />
                         </label>
                     </div>
                     <div>
                         <input type="checkbox" name="one" id="one" />
                         <label htmlFor="one">
-                            <i className="fi-xnsuxl-star-solid yellowStar"></i>
-                            <i className="fi-xtluxl-star-thin"></i>
-                            <i className="fi-xtluxl-star-thin"></i>
-                            <i className="fi-xtluxl-star-thin"></i>
-                            <i className="fi-xtluxl-star-thin"></i>
+                            <FaStar className="yellowStar" />
+                            <FaRegStar />
+                            <FaRegStar />
+                            <FaRegStar />
+                            <FaRegStar />
                         </label>
                     </div>
                 </div>
@@ -95,30 +106,105 @@ const AsideFilter = () => {
                 <h4>Preis</h4>
                 <div className="asidePrice-Div">
                     {/* ######################## */}
+                    <Range
+                        values={values}
+                        step={STEP}
+                        min={MIN}
+                        max={MAX}
+                        // rtl={rtl}
+                        onChange={(values) => {
+                            setValues(values);
+                        }}
+                        renderTrack={({ props, children }) => (
+                            <div
+                                onMouseDown={props.onMouseDown}
+                                onTouchStart={props.onTouchStart}
+                                style={{
+                                    ...props.style,
+                                    height: "36px",
+                                    display: "flex",
+                                    width: "100%",
+                                }}
+                            >
+                                <div
+                                    ref={props.ref}
+                                    style={{
+                                        height: "5px",
+                                        width: "100%",
+                                        borderRadius: "4px",
+                                        background: getTrackBackground({
+                                            values,
+                                            colors: [
+                                                "rgba(209, 209, 209, 1)",
+                                                "rgba(120, 84, 247, 1)",
+                                                "rgba(209, 209, 209, 1)",
+                                            ],
+                                            min: MIN,
+                                            max: MAX,
+                                            // rtl,
+                                        }),
+                                        alignSelf: "center",
+                                    }}
+                                >
+                                    {children}
+                                </div>
+                            </div>
+                        )}
+                        renderThumb={({ props, isDragged }) => (
+                            <div
+                                {...props}
+                                style={{
+                                    ...props.style,
+                                    height: "20px",
+                                    width: "20px",
+                                    borderRadius: "50%",
+                                    backgroundColor: "#FFF",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    boxShadow: "0px 2px 6px #AAA",
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        height: "16px",
+                                        width: "5px",
+                                        backgroundColor: isDragged
+                                            ? "#fff"
+                                            : "#fff",
+                                    }}
+                                />
+                            </div>
+                        )}
+                    />
+
                     {/* ######################## */}
                     <div className="priceFlex-Div">
                         <div>
                             <p>Min</p>
                             <input
-                                type="number"
-                                min="0"
+                                type="text"
+                                value={`${values[0]}€`}
                                 name="minPrice"
                                 id="minPrice"
+                                disabled={true}
                             />
                         </div>
                         -
                         <div>
                             <p>Max</p>
                             <input
-                                type="number"
-                                max="10000"
+                                type="text"
+                                value={`${values[1]}€`}
                                 name="maxPrice"
                                 id="maxPrice"
+                                disabled={true}
                             />
                         </div>
                     </div>
                     <div>
                         <input
+                            onClick={resetValue}
                             className="btn-primary"
                             type="reset"
                             value="Reset"

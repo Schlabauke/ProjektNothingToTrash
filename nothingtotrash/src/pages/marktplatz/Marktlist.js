@@ -1,10 +1,9 @@
-import { data } from "../../data";
 import MarktplatzItem from "./MarktplatzItem";
 
-const Marktlist = () => {
+const Marktlist = (props) => {
     return (
         <div className="marktlist">
-            {data.map((e, i) => (
+            {props.data.map((e, i) => (
                 <MarktplatzItem
                     key={i}
                     id={e.id}

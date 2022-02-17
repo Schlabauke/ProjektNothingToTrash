@@ -14,7 +14,6 @@ import Wishlist from "./pages/wishlist/Wishlist";
 import DetailPage from "./pages/detailPage/DetailPage";
 
 const newToken = createContext({});
-
 function App() {
     const [token, setToken] = useState(false);
 

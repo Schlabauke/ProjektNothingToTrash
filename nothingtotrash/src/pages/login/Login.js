@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { newToken } from "../../App";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { token, setToken } = useContext(newToken);
+    const { setToken } = useContext(newToken);
+    const navigate = useNavigate();
+    const [success, setSuccess] = useState("Mit Email anmelden");
 
     const loginFetch = (e) => {
         e.preventDefault();
@@ -21,9 +24,10 @@ const Login = () => {
                 if (res.data.token) {
                     setToken(res.data.token);
                     console.log(res);
+                    navigate("/");
                 } else {
+                    setSuccess("Email oder Passwort falsch!!");
                     console.log(res);
-                    console.log("kacke");
                 }
             });
     };
@@ -33,7 +37,7 @@ const Login = () => {
             <div>
                 <h2>Registriere Dich & nimm Teil</h2>
                 <article>
-                    <h2>Mit Email anmelden</h2>
+                    <h2>{success}</h2>
                     <form>
                         <input
                             onChange={(e) => setEmail(e.target.value)}

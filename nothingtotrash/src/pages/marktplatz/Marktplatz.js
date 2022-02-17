@@ -1,10 +1,28 @@
+import { NavLink } from "react-router-dom";
 import AsideFilter from "../../components/asideFilter/AsideFilter";
 import Footer from "../../components/footer/Footer";
 import FooterEnd from "../../components/footerEnd/FooterEnd";
-
 import Marktlist from "./Marktlist";
+import { useContext, useState } from "react";
+import { newToken } from "../../App";
+import { data } from "../../data";
 
 const Marktplatz = () => {
+    const { token, setToken } = useContext(newToken);
+    const { APIData, setAPIData } = useState({ data });
+    const [searchInput, setSearchInput] = useState("");
+    console.log(APIData);
+
+    const searchItems = (searchValue) => {
+        setSearchInput(searchValue);
+
+        const filteredData = APIData.filter((item) => {
+            return Object.values(item)
+                .join("")
+                .toLowerCase()
+                .includes(searchInput.toLowerCase());
+        });
+    };
     return (
         <>
             <section className="marktplatz-Sec">
@@ -19,18 +37,22 @@ const Marktplatz = () => {
                         Müll zu reduzieren und trashnothing.
                     </p>
                     <input
+                        onChange={(e) => searchItems(e.target.value)}
                         type="text"
                         name="search"
                         id="search"
                         placeholder="Suche nach Produkt, Kategorie..."
                     />
-                    <article className="btn-primary" href="/addproduct">
+                    <NavLink
+                        className="btn-primary"
+                        to={token ? "/addproduct" : "/login"}
+                    >
                         Produkt einstellen
-                    </article>
+                    </NavLink>
                 </article>
                 <article className="articleAndFilterWrap">
                     <AsideFilter />
-                    <Marktlist />
+                    <Marktlist data={data} />
                 </article>
             </section>
             <Footer />

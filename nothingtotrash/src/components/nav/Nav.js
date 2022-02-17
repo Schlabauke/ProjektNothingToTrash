@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { newToken } from "../../App";
 
 const Nav = () => {
     const { token, setToken } = useContext(newToken);
     const logoutFunction = () => {
-        setToken(false);
+        setToken(null);
     };
     return (
         <nav>
@@ -19,7 +19,7 @@ const Nav = () => {
 
             <div>
                 {token ? (
-                    <NavLink to="/login">Mein Marktplatz</NavLink>
+                    <NavLink to="/wishlist">Wunschliste</NavLink>
                 ) : (
                     <NavLink to="/login">Log In</NavLink>
                 )}

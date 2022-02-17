@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
 import FooterEnd from "../../components/footerEnd/FooterEnd";
+import { useContext } from "react";
+import { newToken } from "../../App";
 
 const Home = () => {
+    const { token, setToken } = useContext(newToken);
+
     return (
         <>
             <section className="home-Sec">
@@ -18,7 +22,10 @@ const Home = () => {
                             Fischernetzen. Hilf mit Müll zu reduzieren und
                             trashnothing.
                         </p>
-                        <NavLink className="btn-primary" to="/addproduct">
+                        <NavLink
+                            className="btn-primary"
+                            to={token ? "/addproduct" : "/login"}
+                        >
                             Starte jetzt!
                         </NavLink>
                     </div>
