@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const { checkEmailExists } = require('../db_access/user_dao')
 const { hashPassword } = require('../utility/pwHash')
+const ObjectId = require('mongodb').ObjectId
 
 //generiere Token
 const generateToken = (user) => {
@@ -18,9 +19,11 @@ const generateToken = (user) => {
     return token
 }
 
+
 async function LoginUser({ email, password }) {
     //email-Input mit Datenbank abgleichen
     const foundUser = await checkEmailExists(email)
+    console.log('FoundUSer',foundUser)
     if (!foundUser) {
         throw new Error('User not found.')
     }
@@ -33,7 +36,9 @@ async function LoginUser({ email, password }) {
     }
     //else generiere token 
     const token = generateToken(foundUser)
-    return token
+    const userObjId = foundUser._id
+    console.log('LoginUser',{token:token, id:foundUser._id})
+    return  {token, userObjId}
 }
 
 module.exports = { LoginUser }

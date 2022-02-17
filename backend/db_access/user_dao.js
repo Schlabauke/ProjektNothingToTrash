@@ -23,6 +23,7 @@ async function getAllProducts() {
     
     return allProducts
 }
+
 async function getAllUsers() {
     const db = await _getDB()
     const allProducts = await db.collection('users').find().toArray();
@@ -36,6 +37,7 @@ async function addProduct(newProduct) {
     const Product = await db.collection('products').insertOne(newProduct)
     return Product
 }
+//user.object_id
 
 module.exports = {
     createNewUser,

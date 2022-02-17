@@ -3,18 +3,17 @@ const app = express()
 const dotenv = require('dotenv')
 const formidable = require("formidable")
 const cors = require('cors')
+//import functions
 const { registerUser } = require('./services/registerUser')
 const { LoginUser } = require('./services/loginUser')
-const { addProduct, getAllProducts , getAllUsers} = require('./db_access/user_dao')
-
-
+const { addProduct, getAllProducts } = require('./db_access/user_dao')
+const { createFavorites } = require('./services/createFavorites')
 
 // Allgemeine Use
 dotenv.config()
 app.use(cors())
 app.use(express.static('uploads'))
 app.use(express.json())
-
 
 
 //POST-Routen
@@ -30,7 +29,7 @@ app.post("/api/users/register", (req, res) => {
             res.sendStatus(201, 'User Created')
         })
         .catch((err) => {
-            res.status(400).send('Sorry!But this User already exists!')
+           send('Sorry!But this User already exists!')
         })
 }) //funktioniert
 
@@ -41,15 +40,16 @@ app.post("/api/users/login", (req, res) => {
 
     LoginUser({ email, password })
         .then((token) => {
-            res.send({ token })
+            res.send( token )
         })
+
         .catch((err) => {
             console.log('Err bei LogIn', err)
-            res.status(400).send({ err: err.message })
+            res.send({ err: err.message })
         });
 })//funktioniert
 
-app.post('/api/products/addProduct', (req, res, next) => {
+app.post('/api/products/addProduct/', (req, res, next) => {
 
     const form = formidable({ multiples: true, uploadDir: 'uploads' });
     form.parse(req, (err, fields, files) => {
@@ -73,7 +73,8 @@ app.post('/api/products/addProduct', (req, res, next) => {
                 PLZ: fields.PLZ,
                 Strasse: fields.Strasse,
                 Name: fields.Name,
-                Telefonnummer: fields.Telefonnummer
+                Telefonnummer: fields.Telefonnummer,
+                userObjId: fields.userObjId,
             }
         
             addProduct(newProduct)
@@ -82,27 +83,30 @@ app.post('/api/products/addProduct', (req, res, next) => {
                     'Produkt wurde hinzugefügt')
             })
             .catch((err)=>{
-                console.log('Err in AddProduct', err)
+            console.log('Err in AddProduct', err)
             res.send({ err: err.message })
             })
             
         }
     })
-})
+}) //funktioniert
 
+app.post('/api/favorites',(req,res)=>{
+    const productObjId = req.body.productObjId
+    const userObjId = req.body.userObjId
+    console.log("productObjId:",productObjId);
+    createFavorites(productObjId)
+    .catch((err) =>{
+        console.log(err,'This ProductObjId already exist in Your Favorites')
+    })
+
+})
 
 
 
 //GET-Routen
 
-app.get('/', (req, res) => {
-
-})
-
-app.get('/login/mySoldProducts', (req, res) => {
-
-})
-
+//für den allgemeinen Marktplatz
 app.get('/api/products/allProducts', (req, res) => {
     console.log("davor");
     getAllProducts()
@@ -116,15 +120,18 @@ app.get('/api/products/allProducts', (req, res) => {
     })
 })
 
-app.get('/api/products/allProducts/:id',(res,req)=>{
-    let id = req.params.id
-
-})
 
 
 const PORT = 3001
 app.listen(PORT, () => console.log('Listening on Port,', PORT))
 
+
+
+// Object_id vom Produkt für Favoriten 
+// insertOne(favorites),anhand der userObjId + ProductObjId
+//post('/api/favorites/)--> was wird dem Frontend senden
+//get('/api/myfavorites')send( favorites of userObjId)
+/* Produkt in allproducts,gleiche product in collection 'favorites' + userObjId */
 
 
 

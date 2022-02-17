@@ -1,4 +1,5 @@
 const AddProduct = () => {
+    
     return (
         <section className="addProduct-Sec">
             <form>
