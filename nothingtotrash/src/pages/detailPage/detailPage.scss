@@ -1,2 +1,33 @@
 .detailPage-Sec {
+  display: grid;
+   align-items: center;
+        grid-template-columns: repeat(2, 1fr);
+         gap: 60px;
+          margin: 5%;
+          img {
+              width: 100%;
+              height: 5%;
+              grid-column: 1/2;
+              margin-top: 10%;
+          }
+          .detailText {
+              margin-bottom: 10%;
+          .describe{
+              width: 50%;
+              
+        p {
+                    width: 50%;
+                    display: inline-block;
+                    margin: 1% 0;
+                }
+          }                  
+          } #btn {
+              background: none;
+              color: $basicButtonBlue-full;
+              border: 1px solid $basicButtonBlue-full;
+              margin: 0 5% 0 0;
+          }
+     
 }
+
+

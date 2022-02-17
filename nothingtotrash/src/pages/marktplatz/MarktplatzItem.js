@@ -21,12 +21,13 @@ const MarktplatzItem = (props) => {
             </div>
             <div>
                 <NavLink className="btn-primary" to={`/details/${props.id}`}>
+                  
                     Details
                 </NavLink>
                 <NavLink className="btn-primary" to="/">
                     Auf die Wunschliste
                 </NavLink>
-            </div>
+            </div>            
         </div>
     );
 };
