@@ -7,22 +7,11 @@ import { useContext, useState } from "react";
 import { newToken } from "../../App";
 import { data } from "../../data";
 
+import useSearchItems from "../../hooks/useSearchItems";
+
 const Marktplatz = () => {
     const { token, setToken } = useContext(newToken);
-    const { APIData, setAPIData } = useState({ data });
-    const [searchInput, setSearchInput] = useState("");
-    console.log(APIData);
-
-    const searchItems = (searchValue) => {
-        setSearchInput(searchValue);
-
-        const filteredData = APIData.filter((item) => {
-            return Object.values(item)
-                .join("")
-                .toLowerCase()
-                .includes(searchInput.toLowerCase());
-        });
-    };
+    const { searchItems, filteredResults } = useSearchItems(data);
     return (
         <>
             <section className="marktplatz-Sec">
@@ -52,7 +41,7 @@ const Marktplatz = () => {
                 </article>
                 <article className="articleAndFilterWrap">
                     <AsideFilter />
-                    <Marktlist data={data} />
+                    <Marktlist data={filteredResults} />
                 </article>
             </section>
             <Footer />

@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { Range, getTrackBackground } from "react-range";
-
 const STEP = 1;
 const MIN = 0;
 const MAX = 1000;
 
-const AsideFilter = () => {
+const AsideFilter = (props) => {
     const [values, setValues] = useState([0, 500]);
     const resetValue = () => {
         setValues([0, 500]);
@@ -14,36 +13,70 @@ const AsideFilter = () => {
     return (
         <aside>
             <form>
-                {/* Kategorien */}
-                <h4>Kategorien</h4>
+                {/* Zustand */}
+                <h4>Zustand</h4>
                 <div className="asideGrid-Div">
-                    <button>Kategorie Name</button>
+                    <div>
+                        <input
+                            type="checkbox"
+                            name="neu"
+                            id="neu"
+                            value="neu"
+                        />
+                        <label htmlFor="neu">neu</label>
+                    </div>
                     <p>123</p>
-                    <button>Kategorie Name</button>
-                    <p>123123</p>
-                    <button>Kategorie Name</button>
+                    <div>
+                        <input
+                            type="checkbox"
+                            name="wieneu"
+                            id="wieneu"
+                            value="Wie neu"
+                        />
+                        <label htmlFor="wieneu">Wie neu</label>
+                    </div>
+                    <p>1123</p>
+                    <div>
+                        <input
+                            type="checkbox"
+                            name="gebraucht"
+                            id="gebraucht"
+                            value="gebraucht"
+                        />
+                        <label htmlFor="gebraucht">gebraucht</label>
+                    </div>
                     <p>1212</p>
-                    <button>Kategorie Name</button>
+                    <div>
+                        <input
+                            type="checkbox"
+                            name="defekt"
+                            id="defekt"
+                            value="Defekt"
+                        />
+                        <label htmlFor="defekt">Defekt</label>
+                    </div>
                     <p>12</p>
                 </div>
-                {/* Marken */}
-                <h4>Marken</h4>
+                {/* Lieferung */}
+                <h4>Lieferung</h4>
                 <div className="asideBranding-Div">
                     <div>
-                        <input type="checkbox" name="marke1" id="marke1" />
-                        <label htmlFor="marke1">marke1</label>
+                        <input
+                            type="radio"
+                            name="lieferung"
+                            id="marke1"
+                            value={true}
+                        />
+                        <label htmlFor="marke1">ja</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="marke2" id="marke2" />
-                        <label htmlFor="marke2">marke2</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="marke3" id="marke3" />
-                        <label htmlFor="marke3">marke3</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="marke4" id="marke4" />
-                        <label htmlFor="marke4">marke4</label>
+                        <input
+                            type="radio"
+                            name="lieferung"
+                            id="marke2"
+                            value={false}
+                        />
+                        <label htmlFor="marke2">nein</label>
                     </div>
                 </div>
 
