@@ -18,6 +18,9 @@ const AsideFilter = (props) => {
                 <div className="asideGrid-Div">
                     <div>
                         <input
+                            onChange={(e) =>
+                                props.insertStatusInState(e.target.value)
+                            }
                             type="checkbox"
                             name="neu"
                             id="neu"
@@ -28,6 +31,9 @@ const AsideFilter = (props) => {
                     <p>123</p>
                     <div>
                         <input
+                            onChange={(e) =>
+                                props.insertStatusInState(e.target.value)
+                            }
                             type="checkbox"
                             name="wieneu"
                             id="wieneu"
@@ -38,6 +44,9 @@ const AsideFilter = (props) => {
                     <p>1123</p>
                     <div>
                         <input
+                            onChange={(e) =>
+                                props.insertStatusInState(e.target.value)
+                            }
                             type="checkbox"
                             name="gebraucht"
                             id="gebraucht"
@@ -48,6 +57,9 @@ const AsideFilter = (props) => {
                     <p>1212</p>
                     <div>
                         <input
+                            onChange={(e) =>
+                                props.insertStatusInState(e.target.value)
+                            }
                             type="checkbox"
                             name="defekt"
                             id="defekt"
@@ -62,19 +74,19 @@ const AsideFilter = (props) => {
                 <div className="asideBranding-Div">
                     <div>
                         <input
+                            onChange={(e) => props.setFilterShipping(true)}
                             type="radio"
                             name="lieferung"
                             id="marke1"
-                            value={true}
                         />
                         <label htmlFor="marke1">ja</label>
                     </div>
                     <div>
                         <input
+                            onChange={(e) => props.setFilterShipping(false)}
                             type="radio"
                             name="lieferung"
                             id="marke2"
-                            value={false}
                         />
                         <label htmlFor="marke2">nein</label>
                     </div>
@@ -84,7 +96,15 @@ const AsideFilter = (props) => {
                 <h4>Bewertung</h4>
                 <div className="asideRating-Div">
                     <div>
-                        <input type="checkbox" name="five" id="five" />
+                        <input
+                            onChange={(e) =>
+                                props.insertRatingInState(e.target.value)
+                            }
+                            type="checkbox"
+                            name="five"
+                            id="five"
+                            value="5"
+                        />
                         <label htmlFor="five">
                             <FaStar className="yellowStar" />
                             <FaStar className="yellowStar" />
@@ -94,7 +114,15 @@ const AsideFilter = (props) => {
                         </label>
                     </div>
                     <div>
-                        <input type="checkbox" name="four" id="four" />
+                        <input
+                            onChange={(e) =>
+                                props.insertRatingInState(e.target.value)
+                            }
+                            type="checkbox"
+                            name="four"
+                            id="four"
+                            value="4"
+                        />
                         <label htmlFor="four">
                             <FaStar className="yellowStar" />
                             <FaStar className="yellowStar" />
@@ -104,7 +132,15 @@ const AsideFilter = (props) => {
                         </label>
                     </div>
                     <div>
-                        <input type="checkbox" name="three" id="three" />
+                        <input
+                            onChange={(e) =>
+                                props.insertRatingInState(e.target.value)
+                            }
+                            type="checkbox"
+                            name="three"
+                            id="three"
+                            value="3"
+                        />
                         <label htmlFor="three">
                             <FaStar className="yellowStar" />
                             <FaStar className="yellowStar" />
@@ -114,7 +150,15 @@ const AsideFilter = (props) => {
                         </label>
                     </div>
                     <div>
-                        <input type="checkbox" name="two" id="two" />
+                        <input
+                            onChange={(e) =>
+                                props.insertRatingInState(e.target.value)
+                            }
+                            type="checkbox"
+                            name="two"
+                            id="two"
+                            value="2"
+                        />
                         <label htmlFor="two">
                             <FaStar className="yellowStar" />
                             <FaStar className="yellowStar" />
@@ -124,7 +168,15 @@ const AsideFilter = (props) => {
                         </label>
                     </div>
                     <div>
-                        <input type="checkbox" name="one" id="one" />
+                        <input
+                            onChange={(e) =>
+                                props.insertRatingInState(e.target.value)
+                            }
+                            type="checkbox"
+                            name="one"
+                            id="one"
+                            value="1"
+                        />
                         <label htmlFor="one">
                             <FaStar className="yellowStar" />
                             <FaRegStar />
