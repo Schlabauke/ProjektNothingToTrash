@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
-const formidable = require("formidable");
+const bodyParser = require('body-parser')
 const cors = require("cors");
 //import functions
 const { registerUser } = require("./services/registerUser");
@@ -9,12 +9,15 @@ const { LoginUser } = require("./services/loginUser");
 const { addProduct, getAllProducts } = require("./db_access/user_dao");
 const { deleteFavorite } = require("./services/deleteFavorite");
 const { addFavorite } = require("./services/addFavoritetoUser");
+const { json } = require("body-parser");
 
 // Allgemeine Use
 dotenv.config();
 app.use(cors());
 app.use(express.static("uploads"));
 app.use(express.json());
+app.use(bodyParser.json())
+app.use(express.urlencoded({extended: false}))
 
 //POST-Routen
 app.post("/api/users/register", (req, res) => {
@@ -49,34 +52,10 @@ app.post("/api/users/login", (req, res) => {
         });
 }); //funktioniert
 
-app.post("/api/products/addProduct/", (req, res, next) => {
-    const form = formidable({ multiples: true, uploadDir: "uploads" });
-    form.parse(req, (err, fields, files) => {
-        console.log(req.body);
-        if (err) {
-            console.log(err);
-            return;
-        } else {
-            let newProduct = {
-                AnzeigenTyp: fields.AnzeigenTyp,
-                Lieferung: fields.Lieferung,
-                Titel: fields.Titel,
-                Zustand: fields.Zustand,
-                Beschreibung: fields.Beschreibung,
-                Bild: files.Bild ? files.Bild.newFilename : "leerer string",
-                Anzahl: fields.Anzahl,
-                Preis: fields.Preis,
-                Festpreis: false,
-                VB: false,
-                zuVerschenken: false,
-                Kategorie: fields.Kategorie,
-                PLZ: fields.PLZ,
-                Ort: fields.Ort,
-                Strasse: fields.Strasse,
-                Name: fields.Name,
-                Telefonnummer: fields.Telefonnummer,
-                userObjId: fields.userObjId,
-            };
+app.post("/api/products/addProduct/", (req, res) => {
+   console.log(req.body)
+        let newProduct = req.body
+        
             addProduct(newProduct)
                 .then(() => {
                     res.send("Produkt wurde hinzugefügt");
@@ -86,9 +65,7 @@ app.post("/api/products/addProduct/", (req, res, next) => {
                     console.log("Err in AddProduct", err);
                     res.send({ err: err.message });
                 });
-        }
-    });
-}); //funktioniert
+            }); //funktioniert
 
 app.post("/api/favorites", (req, res) => {
     const productObjId = req.body.productObjId;
