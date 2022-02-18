@@ -4,12 +4,12 @@ import FooterEnd from "../../components/footerEnd/FooterEnd";
 import { useParams } from "react-router-dom";
 const DetailPage = (props) => {
     let { id } = useParams();
-    let oneData = props.data.filter((e) => e.id == id)[0];
+    let oneData = props.data.filter((e) => e._id == id)[0];
     return (
         <>
             <section className="detailPage-Sec">
                 <figure>
-                    <img src={`/img/${oneData.img}`} alt="" />
+                    <img src={`/img/${oneData.Bild}`} alt="" />
                     <figcaption>
                         <NavLink className="btn-primary" id="btn" to="/">
                             Bearbeiten
@@ -20,17 +20,17 @@ const DetailPage = (props) => {
                     </figcaption>
                 </figure>
                 <div className="detailText">
-                    <h2>{oneData.title}</h2>
-                    <h3>{oneData.price},00 EUR</h3>
+                    <h2>{oneData.Titel}</h2>
+                    <h3>{oneData.Preis},00 EUR</h3>
                     <div className="describe">
                         <p>Zustand</p>
                         <span>{oneData.status}</span>
-                        <p>Marke</p>
-                        <span>{oneData.brand}</span>
+                        {/* <p>Marke</p>
+                        <span>{oneData.brand}</span> */}
                         <p>Lieferung</p>
-                        <span>{oneData.shipping ? "ja" : "nein"}</span>
+                        <span>{oneData.Lieferung ? "ja" : "nein"}</span>
                         <p>Auf Lager</p>
-                        <span>{oneData.quantity}</span>
+                        <span>{oneData.Anzahl}</span>
                     </div>
                     <div>
                         <NavLink className="btn-primary" id="btn1" to="/">

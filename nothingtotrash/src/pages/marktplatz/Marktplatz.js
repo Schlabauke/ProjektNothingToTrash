@@ -3,7 +3,7 @@ import AsideFilter from "../../components/asideFilter/AsideFilter";
 import Footer from "../../components/footer/Footer";
 import FooterEnd from "../../components/footerEnd/FooterEnd";
 import Marktlist from "./Marktlist";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { newToken } from "../../App";
 
 // Hooks
@@ -35,7 +35,18 @@ const Marktplatz = (props) => {
     };
     const [filterPrice, setFilterPrice] = useState([]);
 
-    // console.log(filterRating);
+    useEffect(() => {
+        const filterStatusFunction = (filteredResults) => {
+            filteredResults.filter((item) => item !== filteredResults);
+        };
+    }, [
+        filteredResults,
+        filterStatus,
+        filterShipping,
+        filterRating,
+        filterPrice,
+    ]);
+    // console.log(filterPrice);
     return (
         <>
             <section className="marktplatz-Sec">

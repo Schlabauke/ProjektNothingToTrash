@@ -199,6 +199,7 @@ const AsideFilter = (props) => {
                         // rtl={rtl}
                         onChange={(values) => {
                             setValues(values);
+                            props.setFilterPrice(values);
                         }}
                         renderTrack={({ props, children }) => (
                             <div

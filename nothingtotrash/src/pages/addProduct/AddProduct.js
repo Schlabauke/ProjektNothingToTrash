@@ -60,35 +60,39 @@ const AddProduct = () => {
             userObjId,
         };
         console.log(newProduct);
-        axios
-            .post("http://localhost:3001/api/products/addProduct/", {
-                body: JSON.stringify(newProduct),
-            })
-            .then((res) => {
-                console.log(res);
-            });
+        // axios
+        //     .post("http://localhost:3001/api/products/addProduct/", {
+        //         body: JSON.stringify(newProduct),
+        //     })
+        //     .then((res) => {
+        //         console.log(res);
+        //     });
     };
 
     return (
         <section className="addProduct-Sec">
-            <form>
+            <form
+                method="post"
+                action="http://localhost:3001/api/products/addProduct/"
+                encType="multipart/form-data"
+            >
                 {/*  Anzeigentyp */}
                 <div className="formWrap-Div">
                     <p>Anzeigentyp:</p>
                     <input
                         onChange={(e) => setAnzeigenTyp(true)}
                         type="radio"
-                        name="typ"
-                        value="biete"
+                        name="AnzeigenTyp"
+                        value={AnzeigenTyp}
                     />
-                    <label htmlFor="biete">Ich biete</label>
+                    <label htmlFor="AnzeigenTyp">Ich biete</label>
                     <input
                         onChange={(e) => setAnzeigenTyp(false)}
                         type="radio"
-                        name="typ"
-                        value="suche"
+                        name="AnzeigenTyp"
+                        value={AnzeigenTyp}
                     />
-                    <label htmlFor="suche">Ich suche</label>
+                    <label htmlFor="AnzeigenTyp">Ich suche</label>
                 </div>
 
                 {/*  Lieferung: */}
@@ -97,15 +101,17 @@ const AddProduct = () => {
                     <input
                         onChange={(e) => setLieferung(true)}
                         type="radio"
-                        name="shipping"
+                        name="Lieferung"
+                        value={Lieferung}
                     />
-                    <label htmlFor="ja">Ja</label>
+                    <label htmlFor="Lieferung">Ja</label>
                     <input
                         onChange={(e) => setLieferung(false)}
                         type="radio"
-                        name="shipping"
+                        name="Lieferung"
+                        value={Lieferung}
                     />
-                    <label htmlFor="nein">nein</label>
+                    <label htmlFor="Lieferung">nein</label>
                 </div>
 
                 {/*  Titel der Anzeige: */}
@@ -114,7 +120,7 @@ const AddProduct = () => {
                     <input
                         onChange={(e) => setTitel(e.target.value)}
                         type="text"
-                        name="title"
+                        name="Titel"
                         value={Titel}
                     />
                 </div>
@@ -124,7 +130,7 @@ const AddProduct = () => {
                     <p>Beschreibung:</p>
                     <textarea
                         onChange={(e) => setBeschreibung(e.target.value)}
-                        name="description"
+                        name="Beschreibung"
                         rows="4"
                         value={Beschreibung}
                     ></textarea>
@@ -136,7 +142,7 @@ const AddProduct = () => {
                     <input
                         onChange={(e) => setAnzahl(e.target.value)}
                         type="number"
-                        name="quantity"
+                        name="Anzahl"
                         value={Anzahl}
                     />
                 </div>
@@ -147,31 +153,34 @@ const AddProduct = () => {
                     <input
                         onChange={(e) => setPreis(e.target.value)}
                         type="number"
-                        name="price"
+                        name="Preis"
                         value={Preis}
                     />
-                    <label htmlFor="price">EUR</label>
+                    <label htmlFor="Preis">EUR</label>
 
                     <input
                         onChange={festpreisFunction}
                         type="radio"
-                        name="priceKind"
+                        name="Festpreis"
+                        value={Festpreis}
                     />
-                    <label htmlFor="priceKind">Festpreis</label>
+                    <label htmlFor="Festpreis">Festpreis</label>
 
                     <input
                         onChange={vbFunction}
                         type="radio"
-                        name="priceKind"
+                        name="VB"
+                        value={VB}
                     />
-                    <label htmlFor="priceKind">VB</label>
+                    <label htmlFor="VB">VB</label>
 
                     <input
                         onChange={zuVerschenkenFunction}
                         type="radio"
-                        name="priceKind"
+                        name="zuVerschenken"
+                        value={zuVerschenken}
                     />
-                    <label className="lastLabel" htmlFor="priceKind">
+                    <label className="zuVerschenken" htmlFor="priceKind">
                         Zu Verschenken
                     </label>
                 </div>
@@ -183,8 +192,9 @@ const AddProduct = () => {
                         onChange={(e) => setBild(e.target.value)}
                         className="inputfile"
                         type="file"
-                        name="file"
-                        id="file"
+                        name="Bild"
+                        id="Bild"
+                        value={Bild}
                     />
                 </div>
 
@@ -193,7 +203,7 @@ const AddProduct = () => {
                     <p>Kategorie:</p>
                     <select
                         onChange={(e) => setKategorie(e.target.value)}
-                        name="categorie"
+                        name="Kategorie"
                     >
                         <option value="Klamotten">Klamotten</option>
                         <option value="Möbel">Möbel</option>
@@ -207,14 +217,14 @@ const AddProduct = () => {
                         <input
                             onChange={(e) => setPlz(e.target.value)}
                             type="number"
-                            name="plz"
+                            name="PLZ"
                             value={Number(PLZ)}
                         />
                         <input
                             onChange={(e) => setOrt(e.target.value)}
                             id="ortInput"
                             type="text"
-                            name="location"
+                            name="Ort"
                             value={Ort}
                             placeholder="Ort"
                         />
@@ -226,7 +236,7 @@ const AddProduct = () => {
                         <input
                             onChange={(e) => setStrasse(e.target.value)}
                             type="text"
-                            name="street"
+                            name="Strasse"
                             value={Strasse}
                         />
                     </div>
@@ -237,7 +247,7 @@ const AddProduct = () => {
                         <input
                             onChange={(e) => setName(e.target.value)}
                             type="text"
-                            name="name"
+                            name="Name"
                             value={Name}
                         />
                     </div>
@@ -248,13 +258,13 @@ const AddProduct = () => {
                         <input
                             onChange={(e) => setTelefonnummer(e.target.value)}
                             type="text"
-                            name="tel"
+                            name="Telefonnummer"
                             value={Number(Telefonnummer)}
                         />
                     </div>
+                    <input type="hidden" name="userObjId" value={userObjId} />
                 </div>
                 <input
-                    onClick={addProductFetch}
                     className="btn-primary formSubmit"
                     type="submit"
                     value="Produkt einstellen"
