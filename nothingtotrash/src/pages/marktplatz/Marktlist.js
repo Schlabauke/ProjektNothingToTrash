@@ -6,7 +6,7 @@ const Marktlist = (props) => {
             {props.data.map((e, i) => (
                 <MarktplatzItem
                     key={i}
-                    id={e.id}
+                    id={e._id}
                     title={e.title}
                     description={e.description}
                     img={e.img}
