@@ -16,18 +16,10 @@ import DetailPage from "./pages/detailPage/DetailPage";
 
 const newToken = createContext({});
 const newUserId = createContext({});
+
 function App() {
     const [token, setToken] = useState(false);
     const [userId, setUserId] = useState(false);
-
-    const [data, setData] = useState([]);
-    useEffect(() => {
-        axios
-            .get("http://localhost:3001/api/products/allProducts")
-            .then((fetchData) => {
-                setData(fetchData.data);
-            });
-    }, []);
 
     return (
         <>
@@ -39,7 +31,7 @@ function App() {
                             <Route path="/" element={<Home />} />
                             <Route
                                 path="/marktplatz"
-                                element={<Marktplatz data={data} />}
+                                element={<Marktplatz />}
                             />
                             <Route path="/ueberuns" element={<Ueberuns />} />
                             <Route path="/login" element={<Login />} />
@@ -48,13 +40,10 @@ function App() {
                                 path="/addproduct"
                                 element={<AddProduct />}
                             />
-                            <Route
-                                path="/wishlist"
-                                element={<Wishlist data={data} />}
-                            />
+                            <Route path="/wishlist" element={<Wishlist />} />
                             <Route
                                 path="/details/:id"
-                                element={<DetailPage data={data} />}
+                                element={<DetailPage />}
                             />
                         </Routes>
                     </Router>

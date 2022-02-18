@@ -8,10 +8,13 @@ import { newToken } from "../../App";
 
 // Hooks
 import useSearchItems from "../../hooks/useSearchItems";
+import useDataFetch from "../../hooks/useDatafetch";
 
-const Marktplatz = (props) => {
+const Marktplatz = () => {
+    const { data, loading } = useDataFetch();
     const { token, setToken } = useContext(newToken);
-    const { searchItems, filteredResults } = useSearchItems(props.data);
+    const { searchItems, filteredResults } = useSearchItems(data);
+    const [filteredArr, setFilteredArr] = useState(filteredResults);
 
     // filter function
     const [filterStatus, setFilterStatus] = useState([]);
@@ -23,6 +26,7 @@ const Marktplatz = (props) => {
         }
     };
 
+    console.log(filteredArr);
     const [filterShipping, setFilterShipping] = useState(true);
 
     const [filterRating, setFilterRating] = useState([]);
@@ -33,20 +37,32 @@ const Marktplatz = (props) => {
             setFilterRating([...filterRating, status]);
         }
     };
+
     const [filterPrice, setFilterPrice] = useState([]);
 
-    useEffect(() => {
-        const filterStatusFunction = (filteredResults) => {
-            filteredResults.filter((item) => item !== filteredResults);
-        };
-    }, [
-        filteredResults,
-        filterStatus,
-        filterShipping,
-        filterRating,
-        filterPrice,
-    ]);
-    // console.log(filterPrice);
+    // useEffect(() => {
+    //     const filterStatusFunction = filteredResults.filter(
+    //         (item) => (item.Zustand = filterStatus)
+    //     );
+    //     const filterShippingResults = filterStatusFunction.filter((item) =>
+    //         item.Lieferung.includes(filterShipping)
+    //     );
+    //     const filterRatingFunction = filterShippingResults.filter((item) =>
+    //         item.Lieferung.includes(filterRating)
+    //     );
+    //     const filterPriceFunction = filterRatingFunction.filter((item) =>
+    //         item.Preis.includes(filterPrice)
+    //     );
+    //     console.log(filteredResults);
+
+    //     setFilteredArr(filterPriceFunction);
+    // }, [
+    //     filteredResults,
+    //     filterStatus,
+    //     filterShipping,
+    //     filterRating,
+    //     filterPrice,
+    // ]);
     return (
         <>
             <section className="marktplatz-Sec">
@@ -81,7 +97,7 @@ const Marktplatz = (props) => {
                         insertRatingInState={insertRatingInState}
                         setFilterPrice={setFilterPrice}
                     />
-                    <Marktlist data={filteredResults} />
+                    <Marktlist loading={loading} data={filteredArr} />
                 </article>
             </section>
             <Footer />

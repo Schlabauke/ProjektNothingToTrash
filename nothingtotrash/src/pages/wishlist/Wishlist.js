@@ -5,10 +5,13 @@ import { NavLink } from "react-router-dom";
 import Marktlist from "../marktplatz/Marktlist";
 
 import useSearchItems from "../../hooks/useSearchItems";
+import useDataFetch from "../../hooks/useDatafetch";
 
-const Wishlist = (props) => {
+const Wishlist = () => {
+    const { data, loading } = useDataFetch();
+
     const { token, setToken } = useContext(newToken);
-    const { searchItems, filteredResults } = useSearchItems(props.data);
+    const { searchItems, filteredResults } = useSearchItems(data);
 
     return (
         <section className="wunschliste-Sec">

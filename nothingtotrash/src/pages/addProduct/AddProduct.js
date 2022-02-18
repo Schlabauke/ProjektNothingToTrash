@@ -37,37 +37,7 @@ const AddProduct = () => {
     const [Strasse, setStrasse] = useState("");
     const [Name, setName] = useState("");
     const [Telefonnummer, setTelefonnummer] = useState(0);
-
-    const addProductFetch = (e) => {
-        e.preventDefault();
-        const newProduct = {
-            AnzeigenTyp,
-            Lieferung,
-            Titel,
-            Beschreibung,
-            Bild,
-            Anzahl,
-            Preis,
-            Festpreis,
-            VB,
-            zuVerschenken,
-            Kategorie,
-            PLZ,
-            Ort,
-            Strasse,
-            Name,
-            Telefonnummer,
-            userObjId,
-        };
-        console.log(newProduct);
-        // axios
-        //     .post("http://localhost:3001/api/products/addProduct/", {
-        //         body: JSON.stringify(newProduct),
-        //     })
-        //     .then((res) => {
-        //         console.log(res);
-        //     });
-    };
+    const [Zustand, setZustand] = useState(0);
 
     return (
         <section className="addProduct-Sec">
@@ -93,6 +63,39 @@ const AddProduct = () => {
                         value={AnzeigenTyp}
                     />
                     <label htmlFor="AnzeigenTyp">Ich suche</label>
+                </div>
+
+                {/*  Zustand */}
+                <div className="formWrap-Div">
+                    <p>Zustand:</p>
+                    <input
+                        onChange={(e) => setZustand(e.target.value)}
+                        type="radio"
+                        name="Zustand"
+                        value="neu"
+                    />
+                    <label htmlFor="Zustand">neu</label>
+                    <input
+                        onChange={(e) => setZustand(e.target.value)}
+                        type="radio"
+                        name="Zustand"
+                        value="Wie neu"
+                    />
+                    <label htmlFor="Zustand">Wie neu</label>
+                    <input
+                        onChange={(e) => setZustand(e.target.value)}
+                        type="radio"
+                        name="Zustand"
+                        value="gebraucht"
+                    />
+                    <label htmlFor="Zustand">gebraucht</label>
+                    <input
+                        onChange={(e) => setZustand(e.target.value)}
+                        type="radio"
+                        name="Zustand"
+                        value="Defekt"
+                    />
+                    <label htmlFor="Zustand">Defekt</label>
                 </div>
 
                 {/*  Lieferung: */}
