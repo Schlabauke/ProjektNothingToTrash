@@ -121,25 +121,6 @@ app.delete("/api/favorites", (req, res) => {
 app.get("/api/products/allProducts", (req, res) => {
     // console.log("davor");
     getAllProducts()
-<<<<<<< HEAD
-    .then((allProducts)=>{
-    console.log(allProducts)
-    res.send(allProducts)
-    })
-    .catch((err)=>{
-        console.log('Err in GET/allProducts', err)
-        res.send({ err: err.message })
-    })
-})
-
-
-const PORT = 3001
-app.listen(PORT, () => console.log('Listening on Port,', PORT))
-
-
-
-
-=======
         .then((allProducts) => {
             // console.log(allProducts);
             res.send(allProducts);
@@ -149,7 +130,6 @@ app.listen(PORT, () => console.log('Listening on Port,', PORT))
             res.send({ err: err.message });
         });
 });
->>>>>>> max
 
 const PORT = 3001;
 app.listen(PORT, () => console.log("Listening on Port,", PORT));
