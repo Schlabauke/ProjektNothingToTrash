@@ -23,7 +23,7 @@ const Home = () => {
                             trashnothing.
                         </p>
                         <NavLink
-                            className="btn-primary"
+                            className="btn-primary btn"
                             to={token ? "/addproduct" : "/login"}
                         >
                             Starte jetzt!

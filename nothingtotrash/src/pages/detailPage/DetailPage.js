@@ -15,7 +15,7 @@ const DetailPage = () => {
                         <NavLink className="btn-primary" id="btn" to="/">
                             Bearbeiten
                         </NavLink>
-                        <NavLink className="btn-primary" to="/">
+                        <NavLink className="btn-primary" id="btn1" to="/">
                             Verkauft
                         </NavLink>
                     </figcaption>
@@ -23,7 +23,6 @@ const DetailPage = () => {
                 <div className="detailText">
                     <h2>{oneData.title}</h2>
                     <h3>{oneData.price},00 EUR</h3>
-
                     <div className="describe">
                         <p>Zustand</p>
                         <span>{oneData.status}</span>
@@ -35,7 +34,7 @@ const DetailPage = () => {
                         <span>{oneData.quantity}</span>
                     </div>
                     <div>
-                        <NavLink className="btn-primary" to="/">
+                        <NavLink className="btn-primary" id="btn1" to="/">
                             Auf die Wunschliste
                         </NavLink>
                     </div>

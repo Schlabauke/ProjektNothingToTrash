@@ -25,3 +25,32 @@ nav {
         margin: 0 0 0 0;
     }
 }
+
+// ################################################################################
+// ################################# MediaQueries #################################
+// ################################################################################
+
+@media only screen and (max-width: 390px){
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 5%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    a {
+        margin: 0 3vw 0 0;
+        font-weight: 500;
+    }
+    .logo {
+        font-size: 1.5rem;
+        
+    }
+    .register-btn {   
+        padding: 6px 14px;  
+    }
+}
+}
+
