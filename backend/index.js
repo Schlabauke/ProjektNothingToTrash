@@ -64,6 +64,7 @@ app.post('/api/products/addProduct/', (req, res, next) => {
                 AnzeigenTyp: fields.AnzeigenTyp,
                 Lieferung: fields.Lieferung,
                 Titel: fields.Titel,
+                Zustand: fields.Zustand,
                 Beschreibung: fields.Beschreibung,
                 Bild: files.Bild ? files.Bild.newFilename : 'leerer string',
                 Anzahl: fields.Anzahl,
@@ -134,7 +135,6 @@ app.get('/api/products/allProducts', (req, res) => {
         res.send({ err: err.message })
     })
 })
-
 
 
 const PORT = 3001
