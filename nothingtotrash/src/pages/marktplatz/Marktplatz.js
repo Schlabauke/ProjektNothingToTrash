@@ -5,13 +5,37 @@ import FooterEnd from "../../components/footerEnd/FooterEnd";
 import Marktlist from "./Marktlist";
 import { useContext, useState } from "react";
 import { newToken } from "../../App";
-import { data } from "../../data";
 
+// Hooks
 import useSearchItems from "../../hooks/useSearchItems";
 
-const Marktplatz = () => {
+const Marktplatz = (props) => {
     const { token, setToken } = useContext(newToken);
-    const { searchItems, filteredResults } = useSearchItems(data);
+    const { searchItems, filteredResults } = useSearchItems(props.data);
+
+    // filter function
+    const [filterStatus, setFilterStatus] = useState([]);
+    const insertStatusInState = (status) => {
+        if (filterStatus.includes(status)) {
+            setFilterStatus(filterStatus.filter((item) => item !== status));
+        } else {
+            setFilterStatus([...filterStatus, status]);
+        }
+    };
+
+    const [filterShipping, setFilterShipping] = useState(true);
+
+    const [filterRating, setFilterRating] = useState([]);
+    const insertRatingInState = (status) => {
+        if (filterRating.includes(status)) {
+            setFilterRating(filterRating.filter((item) => item !== status));
+        } else {
+            setFilterRating([...filterRating, status]);
+        }
+    };
+    const [filterPrice, setFilterPrice] = useState([]);
+
+    // console.log(filterRating);
     return (
         <>
             <section className="marktplatz-Sec">
@@ -40,7 +64,12 @@ const Marktplatz = () => {
                     </NavLink>
                 </article>
                 <article className="articleAndFilterWrap">
-                    <AsideFilter />
+                    <AsideFilter
+                        insertStatusInState={insertStatusInState}
+                        setFilterShipping={setFilterShipping}
+                        insertRatingInState={insertRatingInState}
+                        setFilterPrice={setFilterPrice}
+                    />
                     <Marktlist data={filteredResults} />
                 </article>
             </section>

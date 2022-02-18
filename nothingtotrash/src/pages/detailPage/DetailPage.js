@@ -1,11 +1,10 @@
-import { data } from "../../data";
 import { NavLink } from "react-router-dom";
 import FooterEnd from "../../components/footerEnd/FooterEnd";
 
 import { useParams } from "react-router-dom";
-const DetailPage = () => {
+const DetailPage = (props) => {
     let { id } = useParams();
-    let oneData = data.filter((e) => e.id == id)[0];
+    let oneData = props.data.filter((e) => e.id == id)[0];
     return (
         <>
             <section className="detailPage-Sec">

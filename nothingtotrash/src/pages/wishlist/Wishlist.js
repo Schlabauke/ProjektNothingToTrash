@@ -3,13 +3,12 @@ import { useContext, useState } from "react";
 import { newToken } from "../../App";
 import { NavLink } from "react-router-dom";
 import Marktlist from "../marktplatz/Marktlist";
-import { data } from "../../data";
 
 import useSearchItems from "../../hooks/useSearchItems";
 
 const Wishlist = (props) => {
     const { token, setToken } = useContext(newToken);
-    const { searchItems, filteredResults } = useSearchItems(data);
+    const { searchItems, filteredResults } = useSearchItems(props.data);
 
     return (
         <section className="wunschliste-Sec">

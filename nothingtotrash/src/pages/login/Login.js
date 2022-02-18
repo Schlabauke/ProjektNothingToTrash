@@ -2,10 +2,12 @@ import axios from "axios";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { newToken } from "../../App";
+import { newUserId } from "../../App";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { setToken } = useContext(newToken);
+    const { setUserId } = useContext(newUserId);
     const navigate = useNavigate();
     const [success, setSuccess] = useState("Mit Email anmelden");
 
@@ -23,11 +25,10 @@ const Login = () => {
             .then((res) => {
                 if (res.data.token) {
                     setToken(res.data.token);
-                    console.log(res);
+                    setUserId(res.data.userObjId);
                     navigate("/");
                 } else {
                     setSuccess("Email oder Passwort falsch!!");
-                    console.log(res);
                 }
             });
     };
