@@ -1,11 +1,10 @@
-import { data } from "../../data";
 import { NavLink } from "react-router-dom";
 import FooterEnd from "../../components/footerEnd/FooterEnd";
 
 import { useParams } from "react-router-dom";
-const DetailPage = () => {
+const DetailPage = (props) => {
     let { id } = useParams();
-    let oneData = data.filter((e) => e.id == id)[0];
+    let oneData = props.data.filter((e) => e.id == id)[0];
     return (
         <>
             <section className="detailPage-Sec">
@@ -15,7 +14,7 @@ const DetailPage = () => {
                         <NavLink className="btn-primary" id="btn" to="/">
                             Bearbeiten
                         </NavLink>
-                        <NavLink className="btn-primary" to="/">
+                        <NavLink className="btn-primary" id="btn1" to="/">
                             Verkauft
                         </NavLink>
                     </figcaption>
@@ -23,7 +22,6 @@ const DetailPage = () => {
                 <div className="detailText">
                     <h2>{oneData.title}</h2>
                     <h3>{oneData.price},00 EUR</h3>
-
                     <div className="describe">
                         <p>Zustand</p>
                         <span>{oneData.status}</span>
@@ -35,7 +33,7 @@ const DetailPage = () => {
                         <span>{oneData.quantity}</span>
                     </div>
                     <div>
-                        <NavLink className="btn-primary" to="/">
+                        <NavLink className="btn-primary" id="btn1" to="/">
                             Auf die Wunschliste
                         </NavLink>
                     </div>

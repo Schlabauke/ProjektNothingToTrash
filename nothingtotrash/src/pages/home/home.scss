@@ -124,19 +124,19 @@
 // ################################# MediaQueries #################################
 // ################################################################################
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 820px) {
     .home-Sec {
         margin: 10% 0 0 0;
         .header-Art {
             background: url("../../img/header_illustration.png") right no-repeat;
             background-size: 35%;
-            padding: 10% 0 15% 5%;
+            padding: 0% 0 15% 5%;
             div {
                 width: 50%;
                 margin: 0 5%;
                 h1 {
                     width: 100%;
-                    margin: 0 0 2% 0;
+                    margin: 0 0 1% 0;
                 }
                 p {
                     line-height: 1.5625rem;
@@ -146,7 +146,7 @@
         .picsGrid-Art {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 50px;
+            gap: 20px;
             padding: 0 5%;
             h2 {
                 grid-column: 1/4;
@@ -171,7 +171,7 @@
                 $basicButtonBlue-full;
             background-size: 90%;
             padding: 0% 8%;
-            margin: 10% 0;
+            margin: 7% 0;
             position: relative;
             color: $basicWhite;
             &:before {
@@ -215,35 +215,160 @@
                 }
                 div {
                     width: 35%;
-                    margin: 0 5%;
+                    margin: 7% 0 0 0;
+                    
                     h3 {
-                        width: 40%;
-                        line-height: 1.2;
-                        margin: 5% 0;
+                        width: 100%;
+                       
                     }
-                    p {
-                        line-height: 1.875rem;
-                    }
+                  
                     .btn-primary {
                         background-color: $basicButtonOrange-full;
+                            padding: 10px 5px;
+                            color: $basicWhite;
+                            border-radius: 5px;
+                            font-size: 1rem;
+                            margin: 2% 0;
+                            display: inline-block;
+                             cursor: pointer;
+                        
                     }
                 }
             }
         }
-        .people-Art {
-            text-align: center;
-            h2 {
-                margin: 1% 0;
+       
+    }
+}
+
+
+// ################################################################################
+// ################################# MediaQueries #################################
+// ################################################################################
+
+@media only screen and (max-width: 820px){
+.home-Sec {
+    .header-Art {
+        padding: 6% 0 15% 5%;
+        div {
+            margin: 0 1%;
+            h1 {
+                font-size: 2.1rem;
+                margin: 0;
             }
             p {
-                display: block;
-                width: 40%;
-                margin: 0 auto;
-            }
-            img {
-                width: 100%;
-                margin: 5% 0 -8% 0;
+                line-height: 1.5625rem;
             }
         }
     }
+    .picsGrid-Art {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 50px;
+        padding: 0 5%;
+        h2 {
+            grid-column: 1/4;
+            width: 30%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        div {
+            img {
+                width: 100%;
+            }
+            h3 {
+                padding: 0 0 0 5%;
+            }
+            p {
+                padding: 0 0 0 5%;
+            }
+        }
+    }
+    .blueBack-Art {
+        background: url("../../img/blue_background.svg") center no-repeat
+            $basicButtonBlue-full;
+        background-size: 90%;
+        padding: 0% 8%;
+        margin: 10% 0;
+        position: relative;
+        color: $basicWhite;
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            border-radius: 100%;
+            width: 100%;
+            height: 80px;
+            background-color: white;
+            right: 0;
+            z-index: 0;
+            top: -40px;
+        }
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            border-radius: 100%;
+            width: 100%;
+            height: 80px;
+            background-color: white;
+            right: 0;
+            z-index: 0;
+            bottom: -40px;
+        }
+        .blueBackFlex-Div {
+            position: relative;
+            display: flex;
+            align-items: center;
+            &:nth-of-type(2) {
+                justify-content: flex-end;
+                margin: 0 5% 0 0;
+                img {
+                    margin: 0 0 -5% 0;
+                    z-index: 1;
+                }
+            }
+            img {
+                margin: -5% 0 0 0;
+            }
+            div {
+                width: 35%;
+                margin: 0 5%;
+                h3 {
+                    width: 40%;
+                    line-height: 1.2;
+                    margin: 5% 0;
+                }
+                p {
+                    line-height: 1.875rem;
+                }
+                .btn-primary {
+                    background-color: $basicButtonOrange-full;
+                }
+            }
+        }
+    }
+    .people-Art {
+        text-align: center;
+        h2 {
+            margin: 1% 0;
+        }
+        p {
+            display: block;
+            width: 40%;
+            margin: 0 auto;
+        }
+        img {
+            width: 100%;
+            margin: 5% 0 -8% 0;
+        }
+    }
+}
+
+
+
+
+
+
+
+
 }
