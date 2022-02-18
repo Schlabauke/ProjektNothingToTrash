@@ -51,7 +51,7 @@ app.post("/api/users/login", (req, res) => {
 
 app.post("/api/products/addProduct/", (req, res, next) => {
     const form = formidable({ multiples: true, uploadDir: "uploads" });
-    form.parse(request, (err, fields, files) => {
+    form.parse(req, (err, fields, files) => {
         console.log(req.body);
         if (err) {
             console.log(err);
@@ -61,6 +61,7 @@ app.post("/api/products/addProduct/", (req, res, next) => {
                 AnzeigenTyp: fields.AnzeigenTyp,
                 Lieferung: fields.Lieferung,
                 Titel: fields.Titel,
+                Zustand: fields.Zustand,
                 Beschreibung: fields.Beschreibung,
                 Bild: files.Bild ? files.Bild.newFilename : "leerer string",
                 Anzahl: fields.Anzahl,
