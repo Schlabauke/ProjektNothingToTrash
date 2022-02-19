@@ -59,7 +59,7 @@ app.post("/api/products/addProduct/", (req, res) => {
 
 	addProduct(newProduct)
 		.then(() => {
-			res.send("Produkt wurde hinzugefügt");
+			res.send({ productAdd: true });
 			console.log(newProduct);
 		})
 		.catch(err => {
