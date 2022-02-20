@@ -43,7 +43,7 @@ const Marktplatz = () => {
     );
 
     const filterShippingResults = filterStatusFunction.filter(
-        (item) => item.Lieferung == filterShipping
+        (item) => (item.Lieferung = filterShipping)
     );
     const filterRatingFunction = filterShippingResults.filter(
         (item) => (item.Lieferung = filterRating)
@@ -98,7 +98,7 @@ const Marktplatz = () => {
                         insertRatingInState={insertRatingInState}
                         setFilterPrice={setFilterPrice}
                     />
-                    <Marktlist loading={loading} data={filteredArr} />
+                    <Marktlist loading={loading} data={data} />
                 </article>
             </section>
             <Footer />

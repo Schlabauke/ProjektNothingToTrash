@@ -110,28 +110,28 @@ const AddProduct = () => {
                 <div className="formWrap-Div">
                     <p>Zustand:</p>
                     <input
-                        onChange={(e) => setZustand(e.target.value)}
+                        // onChange={(e) => setZustand(e.target.value)}
                         type="radio"
                         name="Zustand"
                         value="neu"
                     />
                     <label htmlFor="Zustand">neu</label>
                     <input
-                        onChange={(e) => setZustand(e.target.value)}
+                        // onChange={(e) => setZustand(e.target.value)}
                         type="radio"
                         name="Zustand"
                         value="Wie neu"
                     />
                     <label htmlFor="Zustand">Wie neu</label>
                     <input
-                        onChange={(e) => setZustand(e.target.value)}
+                        // onChange={(e) => setZustand(e.target.value)}
                         type="radio"
                         name="Zustand"
                         value="gebraucht"
                     />
                     <label htmlFor="Zustand">gebraucht</label>
                     <input
-                        onChange={(e) => setZustand(e.target.value)}
+                        // onChange={(e) => setZustand(e.target.value)}
                         type="radio"
                         name="Zustand"
                         value="Defekt"

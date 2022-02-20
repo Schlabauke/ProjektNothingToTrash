@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import axios from "axios";
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext } from "react";
 import "./scss/main.scss";
 import Nav from "./components/nav/Nav";
 
