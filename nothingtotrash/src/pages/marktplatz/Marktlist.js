@@ -1,27 +1,23 @@
 import MarktplatzItem from "./MarktplatzItem";
 
 const Marktlist = (props) => {
+    console.log(props);
     return (
-        <>
-            {props.loading && <div>Loading....</div>}
-            {!props.loading && (
-                <div className="marktlist">
-                    {props.data.map((e, i) => (
-                        <MarktplatzItem
-                            key={i}
-                            id={e._id}
-                            title={e.Titel}
-                            description={e.Beschreibung}
-                            img={e.Bild}
-                            price={e.Preis}
-                            status={e.Zustand}
-                            shipping={e.Lieferung}
-                            quantity={e.Anzahl}
-                        />
-                    ))}
-                </div>
-            )}
-        </>
+        <div className="marktlist">
+            {props.data.map((e, i) => (
+                <MarktplatzItem
+                    key={i}
+                    id={e._id}
+                    title={e.Titel}
+                    description={e.Beschreibung}
+                    img={e.Bild.convertedImage}
+                    price={e.Preis}
+                    status={e.Zustand}
+                    shipping={e.Lieferung}
+                    quantity={e.Anzahl}
+                />
+            ))}
+        </div>
     );
 };
 
