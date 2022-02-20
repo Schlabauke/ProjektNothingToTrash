@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 const MarktplatzItem = (props) => {
     return (
         <div className="marktplatzitem">
-            <img src={`/img/${props.img}`} alt={props.title} />
+            <img src={props.img} alt={props.title} />
             <div className="text">
                 <h4>{props.price} EUR</h4>
                 <h4>{props.title}</h4>

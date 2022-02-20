@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { newUserId } from "../../App";
+import { Convert } from "mongo-image-converter"
 
 const AddProduct = () => {
     const { userId } = useContext(newUserId);
@@ -38,43 +39,50 @@ const AddProduct = () => {
     const [Name, setName] = useState("");
     const [Telefonnummer, setTelefonnummer] = useState(0);
 
-    const addProductFetch = (e) => {
+    const addProductFetch = async(e) => {
         e.preventDefault();
-        const newProduct = {
-            AnzeigenTyp,
-            Lieferung,
-            Titel,
-            Beschreibung,
-            Bild,
-            Anzahl,
-            Preis,
-            Festpreis,
-            VB,
-            zuVerschenken,
-            Kategorie,
-            PLZ,
-            Ort,
-            Strasse,
-            Name,
-            Telefonnummer,
-            userObjId,
-        };
-        console.log(newProduct);
-        // axios
-        //     .post("http://localhost:3001/api/products/addProduct/", {
-        //         body: JSON.stringify(newProduct),
-        //     })
-        //     .then((res) => {
-        //         console.log(res);
-        //     });
+        try{
+            let convertedImage = {}
+        convertedImage = await Convert(Bild)
+          const newProduct= {
+                AnzeigenTyp,
+                Lieferung,
+                Titel,
+                Beschreibung,
+                Bild: {convertedImage}, 
+                Anzahl,
+                Preis,
+                Festpreis,
+                VB,
+                zuVerschenken,
+                Kategorie,
+                PLZ,
+                Ort,
+                Strasse,
+                Name,
+                Telefonnummer,
+                userObjId,
+          }
+        console.log(newProduct)
+        axios.post('http://localhost:3001/api/products/addProduct/',newProduct)
+        .then(() => {
+            console.log('Produkt wurde hinzugefügt')
+        })
+        .catch((err)=>{
+            console.log("Err in AddProduct", err)
+        })
+    }
+    catch(err){
+        console.log('OOOOPS I did it again')
+    }
     };
 
     return (
         <section className="addProduct-Sec">
             <form
-                method="post"
+                /* method="post"
                 action="http://localhost:3001/api/products/addProduct/"
-                encType="multipart/form-data"
+                encType="multipart/form-data" */
             >
                 {/*  Anzeigentyp */}
                 <div className="formWrap-Div">
@@ -189,12 +197,11 @@ const AddProduct = () => {
                 <div className="formWrap-Div">
                     <p>Bilder:</p>
                     <input
-                        onChange={(e) => setBild(e.target.value)}
+                        onChange={(e) => setBild(e.target.files[0])}
                         className="inputfile"
                         type="file"
                         name="Bild"
                         id="Bild"
-                        value={Bild}
                     />
                 </div>
 
@@ -268,6 +275,7 @@ const AddProduct = () => {
                     className="btn-primary formSubmit"
                     type="submit"
                     value="Produkt einstellen"
+                    onClick={addProductFetch}
                 />
             </form>
         </section>
