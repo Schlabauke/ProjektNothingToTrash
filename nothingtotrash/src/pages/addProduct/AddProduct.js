@@ -8,6 +8,8 @@ const AddProduct = () => {
     const userObjId = userId;
 
     const [AnzeigenTyp, setAnzeigenTyp] = useState(true);
+    const [Zustand, setZustand] = useState("");
+
     const [Lieferung, setLieferung] = useState(true);
     const [Titel, setTitel] = useState("");
     const [Beschreibung, setBeschreibung] = useState("");
@@ -46,6 +48,7 @@ const AddProduct = () => {
             convertedImage = await Convert(Bild);
             const newProduct = {
                 AnzeigenTyp,
+                Zustand,
                 Lieferung,
                 Titel,
                 Beschreibung,
@@ -110,28 +113,28 @@ const AddProduct = () => {
                 <div className="formWrap-Div">
                     <p>Zustand:</p>
                     <input
-                        // onChange={(e) => setZustand(e.target.value)}
+                        onChange={(e) => setZustand(e.target.value)}
                         type="radio"
                         name="Zustand"
                         value="neu"
                     />
                     <label htmlFor="Zustand">neu</label>
                     <input
-                        // onChange={(e) => setZustand(e.target.value)}
+                        onChange={(e) => setZustand(e.target.value)}
                         type="radio"
                         name="Zustand"
                         value="Wie neu"
                     />
                     <label htmlFor="Zustand">Wie neu</label>
                     <input
-                        // onChange={(e) => setZustand(e.target.value)}
+                        onChange={(e) => setZustand(e.target.value)}
                         type="radio"
                         name="Zustand"
                         value="gebraucht"
                     />
                     <label htmlFor="Zustand">gebraucht</label>
                     <input
-                        // onChange={(e) => setZustand(e.target.value)}
+                        onChange={(e) => setZustand(e.target.value)}
                         type="radio"
                         name="Zustand"
                         value="Defekt"
