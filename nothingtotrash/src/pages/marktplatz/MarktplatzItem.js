@@ -3,31 +3,28 @@ import { NavLink } from "react-router-dom";
 const MarktplatzItem = (props) => {
     return (
         <div className="marktplatzitem">
-            <img src={props.img} alt={props.title} />
+            <img src={props.Bild} alt={props.Titel} />
             <div className="text">
-                <h4>{props.price} EUR</h4>
-                <h4>{props.title}</h4>
-                <p>{props.description}</p>
+                <h4>{props.Preis} EUR</h4>
+                <h4>{props.Titel}</h4>
+                <p>{props.Beschreibung}</p>
                 <div>
                     <p>Zustand</p>
-                    <span>{props.status}</span>
-                    <p>Marke</p>
-                    <span>{props.brand}</span>
+                    <span>{props.Zustand}</span>
                     <p>Lieferung</p>
-                    <span>{props.shipping ? "ja" : "nein"}</span>
+                    <span>{props.Lieferung ? "ja" : "nein"}</span>
                     <p>Auf Lager</p>
-                    <span>{props.quantity}</span>
+                    <span>{props.Anzahl}</span>
                 </div>
             </div>
             <div>
                 <NavLink className="btn-primary" to={`/details/${props.id}`}>
-                  
                     Details
                 </NavLink>
                 <NavLink className="btn-primary" to="/">
                     Auf die Wunschliste
                 </NavLink>
-            </div>            
+            </div>
         </div>
     );
 };

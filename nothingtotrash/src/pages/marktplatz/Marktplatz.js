@@ -8,10 +8,13 @@ import { newToken } from "../../App";
 
 // Hooks
 import useSearchItems from "../../hooks/useSearchItems";
+import useDataFetch from "../../hooks/useDatafetch";
 
-const Marktplatz = (props) => {
+const Marktplatz = () => {
     const { token, setToken } = useContext(newToken);
-    const { searchItems, filteredResults } = useSearchItems(props.data);
+    const { data, loading } = useDataFetch();
+
+    const [filteredArr, setFilteredArr] = useState(data);
 
     // filter function
     const [filterStatus, setFilterStatus] = useState([]);
@@ -35,10 +38,25 @@ const Marktplatz = (props) => {
     };
     const [filterPrice, setFilterPrice] = useState([]);
 
+    const filterStatusFunction = data.filter(
+        (item) => (item.Zustand = filterStatus)
+    );
+
+    const filterShippingResults = filterStatusFunction.filter(
+        (item) => (item.Lieferung = filterShipping)
+    );
+    const filterRatingFunction = filterShippingResults.filter(
+        (item) => (item.Lieferung = filterRating)
+    );
+    const filterPriceFunction = filterRatingFunction.filter(
+        (item) => item.Preis >= filterPrice[0] && item.Preis <= filterPrice[1]
+    );
+    const { searchItems, filteredResults } =
+        useSearchItems(filterPriceFunction);
+
+    console.log(filterPriceFunction);
     useEffect(() => {
-        const filterStatusFunction = (filteredResults) => {
-            filteredResults.filter((item) => item !== filteredResults);
-        };
+        setFilteredArr(filteredResults);
     }, [
         filteredResults,
         filterStatus,
@@ -46,7 +64,6 @@ const Marktplatz = (props) => {
         filterRating,
         filterPrice,
     ]);
-    // console.log(filterPrice);
     return (
         <>
             <section className="marktplatz-Sec">
@@ -81,7 +98,7 @@ const Marktplatz = (props) => {
                         insertRatingInState={insertRatingInState}
                         setFilterPrice={setFilterPrice}
                     />
-                    <Marktlist data={filteredResults} />
+                    <Marktlist loading={loading} data={data} />
                 </article>
             </section>
             <Footer />

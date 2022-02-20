@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { newUserId } from "../../App";
-import { Convert } from "mongo-image-converter"
+import { Convert } from "mongo-image-converter";
 
 const AddProduct = () => {
     const { userId } = useContext(newUserId);
     const userObjId = userId;
 
     const [AnzeigenTyp, setAnzeigenTyp] = useState(true);
+    const [Zustand, setZustand] = useState("");
+
     const [Lieferung, setLieferung] = useState(true);
     const [Titel, setTitel] = useState("");
     const [Beschreibung, setBeschreibung] = useState("");
@@ -39,17 +41,18 @@ const AddProduct = () => {
     const [Name, setName] = useState("");
     const [Telefonnummer, setTelefonnummer] = useState(0);
 
-    const addProductFetch = async(e) => {
+    const addProductFetch = async (e) => {
         e.preventDefault();
-        try{
-            let convertedImage = {}
-        convertedImage = await Convert(Bild)
-          const newProduct= {
+        try {
+            let convertedImage = {};
+            convertedImage = await Convert(Bild);
+            const newProduct = {
                 AnzeigenTyp,
+                Zustand,
                 Lieferung,
                 Titel,
                 Beschreibung,
-                Bild: {convertedImage}, 
+                Bild: { convertedImage },
                 Anzahl,
                 Preis,
                 Festpreis,
@@ -62,25 +65,28 @@ const AddProduct = () => {
                 Name,
                 Telefonnummer,
                 userObjId,
-          }
-        console.log(newProduct)
-        axios.post('http://localhost:3001/api/products/addProduct/',newProduct)
-        .then(() => {
-            console.log('Produkt wurde hinzugefügt')
-        })
-        .catch((err)=>{
-            console.log("Err in AddProduct", err)
-        })
-    }
-    catch(err){
-        console.log('OOOOPS I did it again')
-    }
+            };
+            console.log(newProduct);
+            axios
+                .post(
+                    "http://localhost:3001/api/products/addProduct/",
+                    newProduct
+                )
+                .then(() => {
+                    console.log("Produkt wurde hinzugefügt");
+                })
+                .catch((err) => {
+                    console.log("Err in AddProduct", err);
+                });
+        } catch (err) {
+            console.log("OOOOPS I did it again");
+        }
     };
 
     return (
         <section className="addProduct-Sec">
             <form
-                /* method="post"
+            /* method="post"
                 action="http://localhost:3001/api/products/addProduct/"
                 encType="multipart/form-data" */
             >
@@ -101,6 +107,39 @@ const AddProduct = () => {
                         value={AnzeigenTyp}
                     />
                     <label htmlFor="AnzeigenTyp">Ich suche</label>
+                </div>
+
+                {/*  Zustand */}
+                <div className="formWrap-Div">
+                    <p>Zustand:</p>
+                    <input
+                        onChange={(e) => setZustand(e.target.value)}
+                        type="radio"
+                        name="Zustand"
+                        value="neu"
+                    />
+                    <label htmlFor="Zustand">neu</label>
+                    <input
+                        onChange={(e) => setZustand(e.target.value)}
+                        type="radio"
+                        name="Zustand"
+                        value="Wie neu"
+                    />
+                    <label htmlFor="Zustand">Wie neu</label>
+                    <input
+                        onChange={(e) => setZustand(e.target.value)}
+                        type="radio"
+                        name="Zustand"
+                        value="gebraucht"
+                    />
+                    <label htmlFor="Zustand">gebraucht</label>
+                    <input
+                        onChange={(e) => setZustand(e.target.value)}
+                        type="radio"
+                        name="Zustand"
+                        value="Defekt"
+                    />
+                    <label htmlFor="Zustand">Defekt</label>
                 </div>
 
                 {/*  Lieferung: */}
