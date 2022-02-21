@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { newToken } from "../../App";
 import { newUserId } from "../../App";
 import { Convert } from "mongo-image-converter";
 
 const AddProduct = () => {
+    const { token, setToken } = useContext(newToken);
     const { userId } = useContext(newUserId);
     const userObjId = userId;
     const navigate = useNavigate();
@@ -49,6 +50,10 @@ const AddProduct = () => {
         try {
             let convertedImage = {};
             convertedImage = await Convert(Bild);
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              }
             const newProduct = {
                 AnzeigenTyp,
                 Zustand,
@@ -68,12 +73,18 @@ const AddProduct = () => {
                 Name,
                 Telefonnummer,
                 userObjId,
+                
             };
-            console.log(newProduct);
+            console.log('aus add - frontend',newProduct);
+            //fetch
             axios
                 .post(
                     "http://localhost:3001/api/products/addProduct/",
-                    newProduct
+                    newProduct,{
+                        headers: {
+                            token
+                        }
+                    }
                 )
                 .then(() => {
                     navigate("/marktplatz");

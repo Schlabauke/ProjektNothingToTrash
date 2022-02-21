@@ -1,6 +1,33 @@
 import { NavLink } from "react-router-dom";
+import  axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { newUserId } from "../../App";
+import { useContext, useState } from "react";
 
 const MarktplatzItem = (props) => {
+    const { userId, setUserId } = useContext(newUserId)
+   const productId = props.id
+    const navigate = useNavigate();
+    const wunschListe = (e) =>{
+        console.log('ProductId', productId);
+        const checkBox = e.target.checked
+        if(checkBox){
+            console.log("checked");
+           axios.
+           post("http://localhost:3001/api/user/favorites", {userObjId:userId, productObjId:productId})
+            // .then(() => {
+            //     navigate("/marktplatz");
+            //     console.log("Produkt wurde zu deinen Favoriten hinzugefügt");
+            // })
+            // .catch((err) => {
+            //     console.log("Err in addFavorites", err);
+            // }); 
+        }
+      else{
+            console.log("unchecked");
+             axios.delete("http://localhost:3001/api/user/favorites/",{data:{userObjId:userId, productObjId:productId}})
+     }
+    }     
     return (
         <div className="marktplatzitem">
             <img src={props.Bild} alt={props.Titel} />
@@ -21,9 +48,10 @@ const MarktplatzItem = (props) => {
                 <NavLink className="btn-primary" to={`/details/${props.id}`}>
                     Details
                 </NavLink>
-                <NavLink className="btn-primary" to="/">
-                    Auf die Wunschliste
-                </NavLink>
+                <label name='Auf die Wunschliste'>
+                <input onChange={wunschListe} type="checkbox" name='Auf die Wunschliste'/>
+                Auf die Wunschliste 
+                </label>
             </div>
         </div>
     );
