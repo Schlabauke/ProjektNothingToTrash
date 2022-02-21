@@ -11,11 +11,9 @@ import useSearchItems from "../../hooks/useSearchItems";
 import useDataFetch from "../../hooks/useDatafetch";
 
 const Marktplatz = () => {
-    const { token, setToken } = useContext(newToken);
+    const { token } = useContext(newToken);
     const { data, loading } = useDataFetch();
-
     const [filteredArr, setFilteredArr] = useState(data);
-
     // filter function
     const [filterStatus, setFilterStatus] = useState([]);
     const insertStatusInState = (status) => {
@@ -53,17 +51,9 @@ const Marktplatz = () => {
     );
     const { searchItems, filteredResults } =
         useSearchItems(filterPriceFunction);
-
-    console.log(filterPriceFunction);
     useEffect(() => {
         setFilteredArr(filteredResults);
-    }, [
-        filteredResults,
-        filterStatus,
-        filterShipping,
-        filterRating,
-        filterPrice,
-    ]);
+    }, [filteredResults]);
     return (
         <>
             <section className="marktplatz-Sec">

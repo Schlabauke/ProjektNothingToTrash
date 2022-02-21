@@ -208,7 +208,7 @@ const AddProduct = () => {
                     <input
                         onChange={festpreisFunction}
                         type="radio"
-                        name="Festpreis"
+                        name="Preisart"
                         value={Festpreis}
                     />
                     <label htmlFor="Festpreis">Festpreis</label>
@@ -216,7 +216,7 @@ const AddProduct = () => {
                     <input
                         onChange={vbFunction}
                         type="radio"
-                        name="VB"
+                        name="Preisart"
                         value={VB}
                     />
                     <label htmlFor="VB">VB</label>
@@ -224,7 +224,7 @@ const AddProduct = () => {
                     <input
                         onChange={zuVerschenkenFunction}
                         type="radio"
-                        name="zuVerschenken"
+                        name="Preisart"
                         value={zuVerschenken}
                     />
                     <label className="zuVerschenken" htmlFor="priceKind">
