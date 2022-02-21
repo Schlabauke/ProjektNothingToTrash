@@ -24,11 +24,11 @@ async function getAllProducts() {
     return allProducts
 }
 
-async function getAllUsers() {
+async function findOneUser(id) {
     const db = await _getDB()
-    const allUsers = await db.collection('users').find().toArray();
-    
-    return allUsers
+    const foundUser = await db.collection('users').findOne(id);
+    console.log(foundUser);
+    return foundUser
 }
 
 //addProduct
@@ -44,6 +44,6 @@ module.exports = {
     checkEmailExists,
     addProduct,
     getAllProducts,
-    getAllUsers
+    findOneUser
 }
 

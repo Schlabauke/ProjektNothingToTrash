@@ -3,13 +3,15 @@ const app = express();
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const jwt = require('jsonwebtoken')
 //import functions
 const { registerUser } = require("./services/registerUser");
 const { LoginUser } = require("./services/loginUser");
-const { addProduct, getAllProducts } = require("./db_access/user_dao");
+const { addProduct, getAllProducts, findOneUser } = require("./db_access/user_dao");
 const { deleteFavorite } = require("./services/deleteFavorite");
 const { addFavorite } = require("./services/addFavoritetoUser");
 const { json } = require("body-parser");
+const { verifyToken } = require("./db_access/verifyToken");
 
 // Allgemeine Use
 
@@ -19,6 +21,7 @@ app.use(express.static("uploads"));
 app.use(express.json({ limit: "16mb" }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
+
 
 //POST-Routen
 app.post("/api/users/register", (req, res) => {
@@ -46,20 +49,19 @@ app.post("/api/users/login", (req, res) => {
 		.then(token => {
 			res.send(token);
 		})
-
 		.catch(err => {
 			console.log("Err bei LogIn", err);
 			res.send({ err: err.message });
 		});
 }); //funktioniert
 
-app.post("/api/products/addProduct/", (req, res) => {
-	console.log(req.body);
+app.post("/api/products/addProduct/", verifyToken,(req, res) => {
+
 	let newProduct = req.body;
 
 	addProduct(newProduct)
 		.then(() => {
-			res.send({ productAdd: true });
+            res.send({ productAdd: true }, {});
 			console.log(newProduct);
 		})
 		.catch(err => {
@@ -68,25 +70,27 @@ app.post("/api/products/addProduct/", (req, res) => {
 		});
 }); //funktioniert
 
-app.post("/api/favorites", (req, res) => {
+app.post("/api/user/favorites", verifyToken , (req, res) => {
+	console.log("favoritesPostRoute", req.body);
 	const productObjId = req.body.productObjId;
 	const userObjId = req.body.userObjId;
 	console.log("productObjId:", productObjId);
 	addFavorite(userObjId, productObjId)
 		.then(userFavorite => {
-			res.send("Favorit wurde hinzugefügt", userFavorite);
+			res.status(201).send( userFavorite);
 		})
 		.catch(err => {
 			console.log(err, "Something went wrong at addFavorite");
 		});
 });
 
-app.delete("/api/favorites", (req, res) => {
+app.delete("/api/user/favorites", verifyToken, (req, res) => {console.log("Delete Route");
 	const productObjId = req.body.productObjId;
 	const userObjId = req.body.userObjId;
+	console.log('delete Nudel:',userObjId,productObjId)
 	deleteFavorite(userObjId, productObjId)
 		.then(deleteFavorite => {
-			res.send("Favorit wurde entfernt", deleteFavorite);
+			res.send(deleteFavorite);
 		})
 		.catch(err => {
 			console.log(err, "Something went wrong at deleteFavorite");
@@ -97,6 +101,7 @@ app.delete("/api/favorites", (req, res) => {
 
 //für den allgemeinen Marktplatz
 app.get("/api/products/allProducts", (req, res) => {
+
 	// console.log("davor");
 	getAllProducts()
 		.then(allProducts => {
@@ -109,5 +114,15 @@ app.get("/api/products/allProducts", (req, res) => {
 		});
 });
 
+app.get('/api/users/favorites',verifyToken,(req,res)=>{
+	const id = req.userId
+	console.log("ID VON USER",id);
+findOneUsers(id)
+.then()
+})
+
+
 const PORT = 3001;
 app.listen(PORT, () => console.log("Listening on Port,", PORT));
+
+

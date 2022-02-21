@@ -7,7 +7,7 @@ const { hashPassword } = require('../utility/pwHash')
 const generateToken = (user) => {
     //Gültigkeitsdauer
     const Now = Date.now() / 1000
-    const expiresAt = 24 * 60 ** 2
+    const expiresAt = 24 * 60**2
     const tokenExpired = Now + expiresAt
     //Usertoken
     const token = jwt.sign({
