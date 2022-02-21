@@ -9,6 +9,9 @@ const AsideFilter = (props) => {
     const [values, setValues] = useState([0, 500]);
     const resetValue = () => {
         setValues([0, 500]);
+        props.setFilterShipping(true);
+        props.setFilterPrice([0, 500]);
+        // props.insertStatusInState("");
     };
     return (
         <aside>
@@ -28,7 +31,7 @@ const AsideFilter = (props) => {
                         />
                         <label htmlFor="neu">neu</label>
                     </div>
-                    <p>123</p>
+                    <p>{props.countZustandNeu}</p>
                     <div>
                         <input
                             onChange={(e) =>
@@ -41,7 +44,7 @@ const AsideFilter = (props) => {
                         />
                         <label htmlFor="wieneu">Wie neu</label>
                     </div>
-                    <p>1123</p>
+                    <p>{props.countZustandWieNeu}</p>
                     <div>
                         <input
                             onChange={(e) =>
@@ -54,7 +57,7 @@ const AsideFilter = (props) => {
                         />
                         <label htmlFor="gebraucht">gebraucht</label>
                     </div>
-                    <p>1212</p>
+                    <p>{props.countZustandGebraucht}</p>
                     <div>
                         <input
                             onChange={(e) =>
@@ -67,7 +70,7 @@ const AsideFilter = (props) => {
                         />
                         <label htmlFor="defekt">Defekt</label>
                     </div>
-                    <p>12</p>
+                    <p>{props.countZustandDefekt}</p>
                 </div>
                 {/* Lieferung */}
                 <h4>Lieferung</h4>

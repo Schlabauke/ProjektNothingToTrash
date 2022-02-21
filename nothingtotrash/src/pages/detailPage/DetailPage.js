@@ -26,7 +26,14 @@ const DetailPage = () => {
                     </figure>
                     <div className="detailText">
                         <h2>{oneData.Titel}</h2>
-                        <h3>{oneData.Preis},00 EUR</h3>
+                        {oneData.Festpreis ? (
+                            <h3>{oneData.Preis},00 EUR</h3>
+                        ) : oneData.VB ? (
+                            <h3>{oneData.Preis},00 EUR VB</h3>
+                        ) : (
+                            <h3>Zu Verschenken</h3>
+                        )}
+
                         <div className="describe">
                             <p>Zustand</p>
                             <span>{oneData.status}</span>
