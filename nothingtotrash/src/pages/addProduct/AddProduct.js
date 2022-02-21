@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { newUserId } from "../../App";
 import { Convert } from "mongo-image-converter";
 
 const AddProduct = () => {
     const { userId } = useContext(newUserId);
     const userObjId = userId;
+    const navigate = useNavigate();
 
     const [AnzeigenTyp, setAnzeigenTyp] = useState(true);
     const [Zustand, setZustand] = useState("");
@@ -73,6 +76,7 @@ const AddProduct = () => {
                     newProduct
                 )
                 .then(() => {
+                    navigate("/marktplatz");
                     console.log("Produkt wurde hinzugefügt");
                 })
                 .catch((err) => {
@@ -253,6 +257,7 @@ const AddProduct = () => {
                     >
                         <option value="Klamotten">Klamotten</option>
                         <option value="Möbel">Möbel</option>
+                        <option value="Sonstiges">Sonstiges..</option>
                     </select>
                 </div>
                 {/*  personal* */}
