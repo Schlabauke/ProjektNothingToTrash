@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useDataFetch = () => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,7 +19,7 @@ const useDataFetch = () => {
         };
 
         fetchData();
-    }, []);
+    }, [loading]);
 
     return {
         data,
