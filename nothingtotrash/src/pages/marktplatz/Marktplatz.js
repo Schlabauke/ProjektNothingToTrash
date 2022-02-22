@@ -13,14 +13,28 @@ import useDataFetch from "../../hooks/useDatafetch";
 const Marktplatz = () => {
     const { token } = useContext(newToken);
     const { data, loading } = useDataFetch();
-    let fetchedData = [];
     const [filteredArr, setFilteredArr] = useState(data);
-    if (!loading) {
-        fetchedData = data;
-    }
+    console.log(data);
+    // * GEHT---------------------------------------------------
+    // Zustand Counter
+    let countZustandNeu = data.reduce((n, x) => n + (x.Zustand === "neu"), 0);
+    let countZustandWieNeu = data.reduce(
+        (n, x) => n + (x.Zustand === "Wie neu"),
+        0
+    );
+    let countZustandGebraucht = data.reduce(
+        (n, x) => n + (x.Zustand === "gebraucht"),
+        0
+    );
+    let countZustandDefekt = data.reduce(
+        (n, x) => n + (x.Zustand === "Defekt"),
+        0
+    );
+    // *--------------------------------------------------------
+
     // filter function
 
-    // -----------------
+    // * GEHT-----------------
     // Zustand
     const [filterStatus, setFilterStatus] = useState([]);
     const insertStatusInState = (status) => {
@@ -30,19 +44,12 @@ const Marktplatz = () => {
             setFilterStatus([...filterStatus, status]);
         }
     };
-    const filteredStatusFunction = (data) => {
-        return;
-    };
-    const filteredStatus = data.filter((item) => item.Zustand == filterStatus);
 
-    // -----------------
+    // * GEHT-----------------
     // Lieferung
-    const [filterShipping, setFilterShipping] = useState(true);
-    const filterShippingResults = filteredStatus.filter(
-        (item) => item.Lieferung == filterShipping
-    );
+    const [filterShipping, setFilterShipping] = useState(null);
 
-    // -----------------
+    // * GEHT-----------------
     // Rating
     const [filterRating, setFilterRating] = useState([]);
     const insertRatingInState = (status) => {
@@ -52,22 +59,67 @@ const Marktplatz = () => {
             setFilterRating([...filterRating, status]);
         }
     };
-    const filterRatingFunction = filterShippingResults.filter(
-        (item) => item.Lieferung == filterRating
-    );
 
-    // -----------------
+    // * GEHT-----------------
     // Preis
-    const [filterPrice, setFilterPrice] = useState([]);
-    const filteredAll = filterRatingFunction.filter(
-        (item) => item.Preis >= filterPrice[0] && item.Preis <= filterPrice[1]
-    );
+    const [filterPrice, setFilterPrice] = useState([0, 500]);
 
-    const { searchItems, filteredResults } = useSearchItems(filteredAll);
+    // * GEHT-----------------
+    // Searchbar
+    const { searchItems, filteredResults } = useSearchItems(data);
+
     useEffect(() => {
-        setFilteredArr(filteredResults);
-    }, [filteredResults]);
-  
+        // * GEHT-----------------
+        // Zustand
+
+        const filteredStatus = filteredResults.filter((item) => {
+            if (filterStatus.length <= 0) {
+                return item;
+            } else {
+                return item.Zustand == filterStatus;
+            }
+        });
+
+        // * GEHT-----------------
+        // Lieferung
+        const filterShippingResults = filteredStatus.filter((item) => {
+            if (filterShipping == null) {
+                return item;
+            } else {
+                return item.Lieferung == filterShipping;
+            }
+        });
+        // * GEHT-----------------
+        // Rating
+        const filterRatingFunction = filterShippingResults.filter((item) => {
+            if (filterRating.length <= 0) {
+                return item;
+            } else {
+                return item.rating == filterRating;
+            }
+        });
+
+        // * GEHT-----------------
+        // Preis
+        const filteredAll = filterRatingFunction.filter((item) => {
+            if (filterPrice.length <= 0) {
+                return item;
+            } else {
+                return (
+                    item.Preis >= filterPrice[0] && item.Preis <= filterPrice[1]
+                );
+            }
+        });
+
+        setFilteredArr(filteredAll);
+    }, [
+        data,
+        filterStatus,
+        filterShipping,
+        filterRating,
+        filterPrice,
+        filteredResults,
+    ]);
     return (
         <>
             <section className="marktplatz-Sec">
@@ -101,8 +153,15 @@ const Marktplatz = () => {
                         setFilterShipping={setFilterShipping}
                         insertRatingInState={insertRatingInState}
                         setFilterPrice={setFilterPrice}
+                        countZustandNeu={countZustandNeu}
+                        countZustandWieNeu={countZustandWieNeu}
+                        countZustandGebraucht={countZustandGebraucht}
+                        countZustandDefekt={countZustandDefekt}
                     />
-                    <Marktlist loading={loading} data={data} />
+                    {loading && <div>Loading</div>}
+                    {!loading && (
+                        <Marktlist loading={loading} data={filteredArr} />
+                    )}
                 </article>
             </section>
             <Footer />

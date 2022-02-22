@@ -79,10 +79,12 @@ const MarktplatzItem = (props) => {
                 <NavLink className="btn-primary" to={`/details/${props.id}`}>
                     Details
                 </NavLink>
+                {token && (
                 <label name='Auf die Wunschliste'>
                 <input onChange={wunschListe} type="checkbox" className="checkBoxes" name='Auf die Wunschliste' value={props.id}/>
                 Auf die Wunschliste 
                 </label>
+                )}
             </div>
         </div>
     ); 

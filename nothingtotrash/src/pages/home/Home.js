@@ -32,7 +32,7 @@ const Home = () => {
                 </article>
                 <article className="picsGrid-Art">
                     <h2>Lebe eCommerce mal anders</h2>
-                    <div>
+                    <div className="art1">
                         <img src="img/gridImg1.svg" alt="gridImg1" />
                         <h3>Verkaufen statt wegwerfen</h3>
                         <p>
@@ -41,7 +41,7 @@ const Home = () => {
                             turpis cursus eget.
                         </p>
                     </div>
-                    <div>
+                    <div className="art1">
                         <img src="img/gridImg2.svg" alt="gridImg1" />
                         <h3>Verschenke und Schütze</h3>
                         <p>
@@ -50,7 +50,7 @@ const Home = () => {
                             turpis cursus eget.
                         </p>
                     </div>
-                    <div>
+                    <div className="art1">
                         <img src="img/gridImg3.svg" alt="gridImg1" />
                         <h3>Der Umwelt zuliebe</h3>
                         <p>
