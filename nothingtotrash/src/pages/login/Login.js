@@ -1,17 +1,36 @@
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { newToken } from "../../App";
-import { newUserId } from "../../App";
+import { newToken ,favorite,newUserId } from "../../App";
+
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { setToken } = useContext(newToken);
+    const { token, setToken } = useContext(newToken);
+    const { userId } = useContext(newUserId);
+    //State für die Favoriten
+    const { favoritesItem, setFavoritesItem } = useContext(favorite)
+   
     const { setUserId } = useContext(newUserId);
     const navigate = useNavigate();
     const [success, setSuccess] = useState("Mit Email anmelden");
 
+//Fetch zum ersten mal alle Favoriten
+    useEffect(() => {
+        axios.get("http://localhost:3001/api/user/favorites", {
+            headers:{token, userId}
+        })
+        .then((res)=>{setFavoritesItem(res.data)})
+        
+        
+      });
+
+
     const loginFetch = (e) => {
+        
+      
+        
+
         e.preventDefault();
         const user = {
             email,

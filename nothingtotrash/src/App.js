@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState, createContext } from "react";
+import { useState, createContext , useEffect} from "react";
 import "./scss/main.scss";
 import Nav from "./components/nav/Nav";
-
+import axios from "axios"
 // Pages
 import Home from "./pages/home/Home";
 import Marktplatz from "./pages/marktplatz/Marktplatz";
@@ -15,13 +15,17 @@ import DetailPage from "./pages/detailPage/DetailPage";
 
 const newToken = createContext({});
 const newUserId = createContext({});
-
+const favorite= createContext({})
 function App() {
+    const [ favoritesItem, setFavoritesItem] = useState("")
     const [token, setToken] = useState(false);
     const [userId, setUserId] = useState(false);
 
+
+    
     return (
         <>
+        <favorite.Provider value = {{favoritesItem, setFavoritesItem}}>
             <newToken.Provider value={{ token, setToken }}>
                 <newUserId.Provider value={{ userId, setUserId }}>
                     <Router>
@@ -48,8 +52,9 @@ function App() {
                     </Router>
                 </newUserId.Provider>
             </newToken.Provider>
+            </favorite.Provider>
         </>
     );
 }
-export { newToken, newUserId };
+export { newToken, newUserId ,favorite};
 export default App;

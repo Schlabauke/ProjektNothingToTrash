@@ -67,7 +67,7 @@ const Marktplatz = () => {
     useEffect(() => {
         setFilteredArr(filteredResults);
     }, [filteredResults]);
-    console.log(filteredAll);
+  
     return (
         <>
             <section className="marktplatz-Sec">
