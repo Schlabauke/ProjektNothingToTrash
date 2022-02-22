@@ -16,3 +16,6 @@ async function addFavorite(userObjId, productObjId){
 module.exports = {
     addFavorite
 }
+
+/* wir wollen keine duplikate in wishlist
+checkboxen im frontend angeklickt bleiben, wenn sie den Favoriten hinzugefügt wurden */

@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
 import  axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { newUserId } from "../../App";
+import { newUserId , newToken} from "../../App";
 import { useContext, useState } from "react";
 
 const MarktplatzItem = (props) => {
     const { userId, setUserId } = useContext(newUserId)
+    const { token, setToken } = useContext(newToken)
    const productId = props.id
     const navigate = useNavigate();
     const wunschListe = (e) =>{
@@ -14,18 +15,20 @@ const MarktplatzItem = (props) => {
         if(checkBox){
             console.log("checked");
            axios.
-           post("http://localhost:3001/api/user/favorites", {userObjId:userId, productObjId:productId})
-            // .then(() => {
-            //     navigate("/marktplatz");
-            //     console.log("Produkt wurde zu deinen Favoriten hinzugefügt");
-            // })
-            // .catch((err) => {
-            //     console.log("Err in addFavorites", err);
-            // }); 
+           post("http://localhost:3001/api/user/favorites",
+            {userObjId:userId, productObjId:productId},
+            {  headers:{
+                token
+            }}
+         )
         }
       else{
             console.log("unchecked");
-             axios.delete("http://localhost:3001/api/user/favorites/",{data:{userObjId:userId, productObjId:productId}})
+             axios.delete("http://localhost:3001/api/user/favorites/",
+             {data:{userObjId:userId, productObjId:productId},
+                headers:{
+                token
+            }})
      }
     }     
     return (

@@ -56,9 +56,7 @@ app.post("/api/users/login", (req, res) => {
 }); //funktioniert
 
 app.post("/api/products/addProduct/", verifyToken,(req, res) => {
-
 	let newProduct = req.body;
-
 	addProduct(newProduct)
 		.then(() => {
             res.send({ productAdd: true }, {});
@@ -86,7 +84,7 @@ app.post("/api/user/favorites", verifyToken , (req, res) => {
 
 app.delete("/api/user/favorites", verifyToken, (req, res) => {console.log("Delete Route");
 	const productObjId = req.body.productObjId;
-	const userObjId = req.body.userObjId;
+	const userObjId = req.userObjId;
 	console.log('delete Nudel:',userObjId,productObjId)
 	deleteFavorite(userObjId, productObjId)
 		.then(deleteFavorite => {
@@ -114,11 +112,17 @@ app.get("/api/products/allProducts", (req, res) => {
 		});
 });
 
-app.get('/api/users/favorites',verifyToken,(req,res)=>{
-	const id = req.userId
-	console.log("ID VON USER",id);
-findOneUsers(id)
-.then()
+app.get('/api/user/favorites',verifyToken,(req,res)=>{
+	const id = req.headers.userid
+	console.log("UserId",id);
+findOneUser(id)
+.then(favorites => {
+	res.send(favorites)
+})
+.catch(err => {
+	console.log("Err in userFavorites", err);
+	res.send({ err: err.message });
+})
 })
 
 

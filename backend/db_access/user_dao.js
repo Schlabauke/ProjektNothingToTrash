@@ -1,5 +1,5 @@
 const { _getDB } = require('./_getDB')
-
+const ObjectId = require('mongodb').ObjectId
 //create new User
 async function createNewUser(user) {
     const db = await _getDB()
@@ -25,10 +25,14 @@ async function getAllProducts() {
 }
 
 async function findOneUser(id) {
+    console.log('in fuction FindOne', id)
     const db = await _getDB()
-    const foundUser = await db.collection('users').findOne(id);
-    console.log(foundUser);
-    return foundUser
+    const foundUser = await db.collection('users').findOne(
+        {_id: new ObjectId(id)}
+        )
+    const favorites = foundUser.favorites
+    console.log('Function findOndeUser',favorites);
+    return favorites
 }
 
 //addProduct
