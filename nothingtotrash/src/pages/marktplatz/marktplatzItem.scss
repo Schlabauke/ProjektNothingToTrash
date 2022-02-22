@@ -49,14 +49,52 @@
                 div {
                     margin: 10% 0;
                 }
+                .btn-primary {
+                    margin: 8% auto;
+                    display: block;
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 1rem;
+                    padding: 15px 25px;
+                    &:nth-of-type(2) {
+                        background-color: rgba(245, 245, 245, 1);
+                        color: $basicDarkFont;
+                    }
+                }
+            }
+        }
+    }
+}
+// ################################# MediaQueries IPhone 12pro #################################
+
+@media only screen and (max-width: 390px) {
+    .marktlist {
+        gap: 15px;
+        width: 60%;
+        margin: 0 0 0 0;
+        .marktplatzitem {
+            width: 120%;
+            margin: 0 0 5% 0;
+            img {
+                width: 350%;
+            }
+            .text {
+                div {
+                    margin: 5% 0;
+                    h4 {
+                        font-size: 0.6rem;
+                    }
+                    p {
+                        font-size: 0.5rem;
+                        width: 60%;
+                        margin: 1% 0;
+                    }
+                }
             }
             .btn-primary {
-                margin: 8% auto;
-                display: block;
-                text-align: center;
-                font-weight: bold;
-                font-size: 1rem;
-                padding: 15px 25px;
+                margin: 5% auto;
+                padding: 5px 2px;
+                font-size: 0.6rem;
                 &:nth-of-type(2) {
                     background-color: rgba(245, 245, 245, 1);
                     color: $basicDarkFont;

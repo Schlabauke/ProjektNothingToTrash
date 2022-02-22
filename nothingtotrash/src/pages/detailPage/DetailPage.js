@@ -44,7 +44,7 @@ const DetailPage = () => {
                             <p>Auf Lager</p>
                             <span>{oneData.Anzahl}</span>
                         </div>
-                        <div>
+                        <div className="button">
                             <NavLink className="btn-primary" id="btn1" to="/">
                                 Auf die Wunschliste
                             </NavLink>
