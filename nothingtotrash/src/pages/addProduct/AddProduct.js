@@ -110,8 +110,8 @@ const AddProduct = () => {
                 </div>
 
                 {/*  Zustand */}
-                <div className="formWrap-Div">
-                    <p>Zustand:</p>
+                <div className="formWrap-Div ">
+                    <p className="zustand">Zustand:</p>
                     <input
                         onChange={(e) => setZustand(e.target.value)}
                         type="radio"
@@ -196,7 +196,7 @@ const AddProduct = () => {
 
                 {/*  Preis: */}
                 <div className="formWrap-Div">
-                    <p>Preis:</p>
+                    <p className="preis">Preis:</p>
                     <input
                         onChange={(e) => setPreis(e.target.value)}
                         type="number"
