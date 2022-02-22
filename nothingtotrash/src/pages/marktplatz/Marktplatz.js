@@ -34,7 +34,7 @@ const Marktplatz = () => {
     // filter function
 
     // * GEHT-----------------
-    // Zustand
+    // * Zustand
     const [filterStatus, setFilterStatus] = useState([]);
     const insertStatusInState = (status) => {
         if (filterStatus.includes(status)) {
@@ -44,7 +44,7 @@ const Marktplatz = () => {
         }
     };
     // * GEHT-----------------
-    // Lieferung
+    // * Lieferung
     const [filterShipping, setFilterShipping] = useState("");
     const insertLieferungInState = (status) => {
         if (filterShipping.includes(status)) {
@@ -54,7 +54,7 @@ const Marktplatz = () => {
         }
     };
     // * GEHT-----------------
-    // Rating
+    // * Rating
     const [filterRating, setFilterRating] = useState([]);
     const insertRatingInState = (status) => {
         if (filterRating.includes(status)) {
@@ -65,11 +65,11 @@ const Marktplatz = () => {
     };
 
     // * GEHT-----------------
-    // Preis
+    // * Preis
     const [filterPrice, setFilterPrice] = useState([0, 500]);
 
     // * GEHT-----------------
-    // Searchbar
+    // * Searchbar
     const { searchItems, filteredResults } = useSearchItems(data);
 
     useEffect(() => {
