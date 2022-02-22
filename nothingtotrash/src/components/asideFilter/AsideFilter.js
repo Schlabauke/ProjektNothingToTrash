@@ -77,8 +77,8 @@ const AsideFilter = (props) => {
                 <div className="asideBranding-Div">
                     <div>
                         <input
-                            onChange={(e) => props.setFilterShipping(true)}
-                            type="radio"
+                            onChange={(e) => props.insertLieferungInState(true)}
+                            type="checkbox"
                             name="lieferung"
                             id="marke1"
                         />
@@ -86,8 +86,10 @@ const AsideFilter = (props) => {
                     </div>
                     <div>
                         <input
-                            onChange={(e) => props.setFilterShipping(false)}
-                            type="radio"
+                            onChange={(e) =>
+                                props.insertLieferungInState(false)
+                            }
+                            type="checkbox"
                             name="lieferung"
                             id="marke2"
                         />

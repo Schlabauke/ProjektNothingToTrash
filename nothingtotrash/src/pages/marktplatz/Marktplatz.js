@@ -14,7 +14,6 @@ const Marktplatz = () => {
     const { token } = useContext(newToken);
     const { data, loading } = useDataFetch();
     const [filteredArr, setFilteredArr] = useState(data);
-    console.log(data);
     // * GEHT---------------------------------------------------
     // Zustand Counter
     let countZustandNeu = data.reduce((n, x) => n + (x.Zustand === "neu"), 0);
@@ -44,11 +43,16 @@ const Marktplatz = () => {
             setFilterStatus([...filterStatus, status]);
         }
     };
-
     // * GEHT-----------------
     // Lieferung
-    const [filterShipping, setFilterShipping] = useState(null);
-
+    const [filterShipping, setFilterShipping] = useState("");
+    const insertLieferungInState = (status) => {
+        if (filterShipping.includes(status)) {
+            setFilterShipping(filterShipping.filter((item) => item !== status));
+        } else {
+            setFilterShipping([...filterShipping, status]);
+        }
+    };
     // * GEHT-----------------
     // Rating
     const [filterRating, setFilterRating] = useState([]);
@@ -71,22 +75,29 @@ const Marktplatz = () => {
     useEffect(() => {
         // * GEHT-----------------
         // Zustand
-
         const filteredStatus = filteredResults.filter((item) => {
             if (filterStatus.length <= 0) {
                 return item;
             } else {
-                return item.Zustand == filterStatus;
+                return (
+                    item.Zustand == filterStatus[0] ||
+                    item.Zustand == filterStatus[1] ||
+                    item.Zustand == filterStatus[2] ||
+                    item.Zustand == filterStatus[3]
+                );
             }
         });
 
         // * GEHT-----------------
         // Lieferung
         const filterShippingResults = filteredStatus.filter((item) => {
-            if (filterShipping == null) {
+            if (filterShipping.length <= 0) {
                 return item;
             } else {
-                return item.Lieferung == filterShipping;
+                return (
+                    item.Lieferung == filterShipping[0] ||
+                    item.Lieferung == filterShipping[1]
+                );
             }
         });
         // * GEHT-----------------
@@ -95,7 +106,12 @@ const Marktplatz = () => {
             if (filterRating.length <= 0) {
                 return item;
             } else {
-                return item.rating == filterRating;
+                return (
+                    item.rating == filterRating[0] ||
+                    item.rating == filterRating[1] ||
+                    item.rating == filterRating[2] ||
+                    item.rating == filterRating[3]
+                );
             }
         });
 
@@ -150,7 +166,7 @@ const Marktplatz = () => {
                 <article className="articleAndFilterWrap">
                     <AsideFilter
                         insertStatusInState={insertStatusInState}
-                        setFilterShipping={setFilterShipping}
+                        insertLieferungInState={insertLieferungInState}
                         insertRatingInState={insertRatingInState}
                         setFilterPrice={setFilterPrice}
                         countZustandNeu={countZustandNeu}
