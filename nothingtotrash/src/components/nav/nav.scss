@@ -30,21 +30,13 @@ nav {
 // ################################# MediaQueries #################################
 // ################################################################################
 
-@media only screen and (max-width: 390px){
-nav {
-    padding: 2% 2%;
-    a {
-        font-size: 0.8rem;
-        margin: 0 2vw 0 0;
-        font-weight: 500;
-    }
-    .logo {
-        font-size: 1rem;
-        
-    }
-    .register-btn {   
-        padding: 2px 4px;  
+@media only screen and (max-width: 450px) {
+    nav {
+        a {
+        }
+        .logo {
+        }
+        .register-btn {
+        }
     }
 }
-}
-
