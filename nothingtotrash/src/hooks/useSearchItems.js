@@ -2,8 +2,9 @@ import { useState } from "react";
 
 const useSearchItems = (data) => {
     const [filteredResults, setFilteredResults] = useState(data);
+
     const searchItems = (searchValue) => {
-        if (searchValue !== "") {
+        if (searchValue !== null) {
             const filteredData = data.filter((item) => {
                 return Object.values(item)
                     .join("")

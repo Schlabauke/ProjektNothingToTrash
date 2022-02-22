@@ -14,7 +14,7 @@ const Nav = () => {
                     nothingtotrash
                 </NavLink>
                 <NavLink to="/marktplatz">Marktplatz</NavLink>
-                <NavLink to="/wishlist">Über Uns</NavLink>
+                <NavLink to="/ueberuns">Über Uns</NavLink>
             </div>
 
             <div>
