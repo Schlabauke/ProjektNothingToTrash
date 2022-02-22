@@ -14,7 +14,7 @@ const Marktplatz = () => {
     const { token } = useContext(newToken);
     const { data, loading } = useDataFetch();
     const [filteredArr, setFilteredArr] = useState(data);
-
+    console.log(data);
     // * GEHT---------------------------------------------------
     // Zustand Counter
     let countZustandNeu = data.reduce((n, x) => n + (x.Zustand === "neu"), 0);
@@ -64,6 +64,8 @@ const Marktplatz = () => {
     // Preis
     const [filterPrice, setFilterPrice] = useState([0, 500]);
 
+    // * GEHT-----------------
+    // Searchbar
     const { searchItems, filteredResults } = useSearchItems(data);
 
     useEffect(() => {
@@ -109,9 +111,6 @@ const Marktplatz = () => {
             }
         });
 
-        // ! GEHT NICHT-----------------
-        // Searchbar
-
         setFilteredArr(filteredAll);
     }, [
         data,
@@ -121,7 +120,6 @@ const Marktplatz = () => {
         filterPrice,
         filteredResults,
     ]);
-    console.log(filteredResults);
     return (
         <>
             <section className="marktplatz-Sec">
