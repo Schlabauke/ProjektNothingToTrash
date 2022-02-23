@@ -24,17 +24,10 @@ const DetailPage = () => {
                             </NavLink>
                         </figcaption>
                     </figure>
-                    <div className="detailText">
+                    <div className="detailText">                        
                         <h2>{oneData.Titel}</h2>
-                        {oneData.Festpreis ? (
-                            <h3>{oneData.Preis},00 EUR</h3>
-                        ) : oneData.VB ? (
-                            <h3>{oneData.Preis},00 EUR VB</h3>
-                        ) : (
-                            <h3>Zu Verschenken</h3>
-                        )}
-
-                        <div className="describe">
+                        <h3>{oneData.Preis}EUR</h3> 
+                        <div className="describe">                     
                             <p>Zustand</p>
                             <span>{oneData.status}</span>
                             {/* <p>Marke</p>
@@ -44,7 +37,7 @@ const DetailPage = () => {
                             <p>Auf Lager</p>
                             <span>{oneData.Anzahl}</span>
                         </div>
-                        <div>
+                        <div className="button">
                             <NavLink className="btn-primary" id="btn1" to="/">
                                 Auf die Wunschliste
                             </NavLink>
