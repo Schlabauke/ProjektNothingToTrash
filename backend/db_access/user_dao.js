@@ -1,5 +1,5 @@
 const { _getDB } = require('./_getDB')
-
+const ObjectId = require('mongodb').ObjectId
 //create new User
 async function createNewUser(user) {
     const db = await _getDB()
@@ -24,11 +24,15 @@ async function getAllProducts() {
     return allProducts
 }
 
-async function getAllUsers() {
+async function findOneUser(id) {
+    console.log('in fuction FindOne', id)
     const db = await _getDB()
-    const allUsers = await db.collection('users').find().toArray();
-    
-    return allUsers
+    const foundUser = await db.collection('users').findOne(
+        {_id: new ObjectId(id)}
+        )
+    const favorites = foundUser.favorites
+    console.log('Function findOndeUser',favorites);
+    return favorites
 }
 
 //addProduct
@@ -44,6 +48,6 @@ module.exports = {
     checkEmailExists,
     addProduct,
     getAllProducts,
-    getAllUsers
+    findOneUser
 }
 

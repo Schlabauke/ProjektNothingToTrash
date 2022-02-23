@@ -8,12 +8,33 @@ import { newToken } from "../../App";
 
 // Hooks
 import useSearchItems from "../../hooks/useSearchItems";
+import useDataFetch from "../../hooks/useDatafetch";
 
-const Marktplatz = (props) => {
-    const { token, setToken } = useContext(newToken);
-    const { searchItems, filteredResults } = useSearchItems(props.data);
+const Marktplatz = () => {
+    const { token } = useContext(newToken);
+    const { data, loading } = useDataFetch();
+    const [filteredArr, setFilteredArr] = useState(data);
+    // * GEHT---------------------------------------------------
+    // Zustand Counter
+    let countZustandNeu = data.reduce((n, x) => n + (x.Zustand === "neu"), 0);
+    let countZustandWieNeu = data.reduce(
+        (n, x) => n + (x.Zustand === "Wie neu"),
+        0
+    );
+    let countZustandGebraucht = data.reduce(
+        (n, x) => n + (x.Zustand === "gebraucht"),
+        0
+    );
+    let countZustandDefekt = data.reduce(
+        (n, x) => n + (x.Zustand === "Defekt"),
+        0
+    );
+    // *--------------------------------------------------------
 
     // filter function
+
+    // * GEHT-----------------
+    // Zustand
     const [filterStatus, setFilterStatus] = useState([]);
     const insertStatusInState = (status) => {
         if (filterStatus.includes(status)) {
@@ -22,9 +43,18 @@ const Marktplatz = (props) => {
             setFilterStatus([...filterStatus, status]);
         }
     };
-
-    const [filterShipping, setFilterShipping] = useState(true);
-
+    // * GEHT-----------------
+    // Lieferung
+    const [filterShipping, setFilterShipping] = useState("");
+    const insertLieferungInState = (status) => {
+        if (filterShipping.includes(status)) {
+            setFilterShipping(filterShipping.filter((item) => item !== status));
+        } else {
+            setFilterShipping([...filterShipping, status]);
+        }
+    };
+    // * GEHT-----------------
+    // Rating
     const [filterRating, setFilterRating] = useState([]);
     const insertRatingInState = (status) => {
         if (filterRating.includes(status)) {
@@ -33,20 +63,79 @@ const Marktplatz = (props) => {
             setFilterRating([...filterRating, status]);
         }
     };
-    const [filterPrice, setFilterPrice] = useState([]);
+
+    // * GEHT-----------------
+    // Preis
+    const [filterPrice, setFilterPrice] = useState([0, 500]);
+
+    // * GEHT-----------------
+    // Searchbar
+    const { searchItems, filteredResults } = useSearchItems(data);
 
     useEffect(() => {
-        const filterStatusFunction = (filteredResults) => {
-            filteredResults.filter((item) => item !== filteredResults);
-        };
+        // * GEHT-----------------
+        // Zustand
+        const filteredStatus = filteredResults.filter((item) => {
+            if (filterStatus.length <= 0) {
+                return item;
+            } else {
+                return (
+                    item.Zustand == filterStatus[0] ||
+                    item.Zustand == filterStatus[1] ||
+                    item.Zustand == filterStatus[2] ||
+                    item.Zustand == filterStatus[3]
+                );
+            }
+        });
+
+        // * GEHT-----------------
+        // Lieferung
+        const filterShippingResults = filteredStatus.filter((item) => {
+            if (filterShipping.length <= 0) {
+                return item;
+            } else {
+                return (
+                    item.Lieferung == filterShipping[0] ||
+                    item.Lieferung == filterShipping[1]
+                );
+            }
+        });
+        // * GEHT-----------------
+        // Rating
+        const filterRatingFunction = filterShippingResults.filter((item) => {
+            if (filterRating.length <= 0) {
+                return item;
+            } else {
+                return (
+                    item.rating == filterRating[0] ||
+                    item.rating == filterRating[1] ||
+                    item.rating == filterRating[2] ||
+                    item.rating == filterRating[3]
+                );
+            }
+        });
+
+        // * GEHT-----------------
+        // Preis
+        const filteredAll = filterRatingFunction.filter((item) => {
+            if (filterPrice.length <= 0) {
+                return item;
+            } else {
+                return (
+                    item.Preis >= filterPrice[0] && item.Preis <= filterPrice[1]
+                );
+            }
+        });
+
+        setFilteredArr(filteredAll);
     }, [
-        filteredResults,
+        data,
         filterStatus,
         filterShipping,
         filterRating,
         filterPrice,
+        filteredResults,
     ]);
-    // console.log(filterPrice);
     return (
         <>
             <section className="marktplatz-Sec">
@@ -77,11 +166,18 @@ const Marktplatz = (props) => {
                 <article className="articleAndFilterWrap">
                     <AsideFilter
                         insertStatusInState={insertStatusInState}
-                        setFilterShipping={setFilterShipping}
+                        insertLieferungInState={insertLieferungInState}
                         insertRatingInState={insertRatingInState}
                         setFilterPrice={setFilterPrice}
+                        countZustandNeu={countZustandNeu}
+                        countZustandWieNeu={countZustandWieNeu}
+                        countZustandGebraucht={countZustandGebraucht}
+                        countZustandDefekt={countZustandDefekt}
                     />
-                    <Marktlist data={filteredResults} />
+                    {loading && <div>Loading</div>}
+                    {!loading && (
+                        <Marktlist loading={loading} data={filteredArr} />
+                    )}
                 </article>
             </section>
             <Footer />

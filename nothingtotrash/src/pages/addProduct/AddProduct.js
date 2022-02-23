@@ -1,20 +1,25 @@
 import axios from "axios";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { newToken } from "../../App";
 import { newUserId } from "../../App";
 import { Convert } from "mongo-image-converter";
-import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+	const { token, setToken } = useContext(newToken);
 	const { userId } = useContext(newUserId);
 	const userObjId = userId;
+	const navigate = useNavigate();
+
 	const [AnzeigenTyp, setAnzeigenTyp] = useState(true);
+	const [Zustand, setZustand] = useState("");
+
 	const [Lieferung, setLieferung] = useState(true);
 	const [Titel, setTitel] = useState("");
 	const [Beschreibung, setBeschreibung] = useState("");
 	const [Anzahl, setAnzahl] = useState(0);
 	const [Preis, setPreis] = useState(0);
 	const [Festpreis, setFestpreis] = useState(true);
-	const navigate = useNavigate();
 	const festpreisFunction = () => {
 		setFestpreis(true);
 		setVb(false);
@@ -45,8 +50,13 @@ const AddProduct = () => {
 		try {
 			let convertedImage = {};
 			convertedImage = await Convert(Bild);
+			const headers = {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			};
 			const newProduct = {
 				AnzeigenTyp,
+				Zustand,
 				Lieferung,
 				Titel,
 				Beschreibung,
@@ -64,15 +74,17 @@ const AddProduct = () => {
 				Telefonnummer,
 				userObjId,
 			};
-			console.log(newProduct);
+			console.log("aus add - frontend", newProduct);
+			//fetch
 			axios
-				.post("http://localhost:3001/api/products/addProduct/", newProduct)
-				.then(res => {
+				.post("http://localhost:3001/api/products/addProduct/", newProduct, {
+					headers: {
+						token,
+					},
+				})
+				.then(() => {
+					navigate("/marktplatz");
 					console.log("Produkt wurde hinzugefügt");
-					console.log(res);
-					if (res.data.productAdd) {
-						navigate("/");
-					}
 				})
 				.catch(err => {
 					console.log("Err in AddProduct", err);
@@ -106,6 +118,39 @@ const AddProduct = () => {
 						value={AnzeigenTyp}
 					/>
 					<label htmlFor='AnzeigenTyp'>Ich suche</label>
+				</div>
+
+				{/*  Zustand */}
+				<div className='formWrap-Div '>
+					<p className='zustand'>Zustand:</p>
+					<input
+						onChange={e => setZustand(e.target.value)}
+						type='radio'
+						name='Zustand'
+						value='neu'
+					/>
+					<label htmlFor='Zustand'>neu</label>
+					<input
+						onChange={e => setZustand(e.target.value)}
+						type='radio'
+						name='Zustand'
+						value='Wie neu'
+					/>
+					<label htmlFor='Zustand'>Wie neu</label>
+					<input
+						onChange={e => setZustand(e.target.value)}
+						type='radio'
+						name='Zustand'
+						value='gebraucht'
+					/>
+					<label htmlFor='Zustand'>gebraucht</label>
+					<input
+						onChange={e => setZustand(e.target.value)}
+						type='radio'
+						name='Zustand'
+						value='Defekt'
+					/>
+					<label htmlFor='Zustand'>Defekt</label>
 				</div>
 
 				{/*  Lieferung: */}
@@ -161,7 +206,7 @@ const AddProduct = () => {
 
 				{/*  Preis: */}
 				<div className='formWrap-Div'>
-					<p>Preis:</p>
+					<p className='preis'>Preis:</p>
 					<input
 						onChange={e => setPreis(e.target.value)}
 						type='number'
@@ -173,18 +218,23 @@ const AddProduct = () => {
 					<input
 						onChange={festpreisFunction}
 						type='radio'
-						name='Festpreis'
+						name='Preisart'
 						value={Festpreis}
 					/>
 					<label htmlFor='Festpreis'>Festpreis</label>
 
-					<input onChange={vbFunction} type='radio' name='VB' value={VB} />
+					<input
+						onChange={vbFunction}
+						type='radio'
+						name='Preisart'
+						value={VB}
+					/>
 					<label htmlFor='VB'>VB</label>
 
 					<input
 						onChange={zuVerschenkenFunction}
 						type='radio'
-						name='zuVerschenken'
+						name='Preisart'
 						value={zuVerschenken}
 					/>
 					<label className='zuVerschenken' htmlFor='priceKind'>
@@ -210,6 +260,7 @@ const AddProduct = () => {
 					<select onChange={e => setKategorie(e.target.value)} name='Kategorie'>
 						<option value='Klamotten'>Klamotten</option>
 						<option value='Möbel'>Möbel</option>
+						<option value='Sonstiges'>Sonstiges..</option>
 					</select>
 				</div>
 				{/*  personal* */}
