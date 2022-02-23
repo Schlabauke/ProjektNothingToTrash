@@ -13,6 +13,24 @@ buttons / navbars / popups / ...
     margin: 2% 0;
     display: inline-block;
 }
+.wishlist-btn {
+    background-color: $formBackground-light;
+    color: $basicDarkFont;
+    border: none;
+    transition: all 0.2s;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+.delete-btn {
+    background-color: $deleteBtn;
+    color: $basicWhite;
+    border: none;
+    transition: all 0.2s;
+    &:hover {
+        opacity: 0.8;
+    }
+}
 .loading-Div {
     margin: 10% auto;
     text-align: center;

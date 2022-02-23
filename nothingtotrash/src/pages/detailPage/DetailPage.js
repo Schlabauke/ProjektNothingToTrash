@@ -4,11 +4,64 @@ import FooterEnd from "../../components/footerEnd/FooterEnd";
 import { useParams } from "react-router-dom";
 import useDataFetch from "../../hooks/useDatafetch";
 import { BiLoaderCircle } from "react-icons/bi";
+import { useContext, useEffect, useState } from "react";
+import { newToken, favorite, newUserId } from "../../App";
+import axios from "axios";
 
 const DetailPage = () => {
+    const { userId } = useContext(newUserId);
+    const { favoritesItem, setFavoritesItem } = useContext(favorite);
+    const { token } = useContext(newToken);
     let { id } = useParams();
     const { data, loading } = useDataFetch();
     let oneData = data.filter((e) => e._id === id)[0];
+    // let fav = favoritesItem.includes(oneData._id);
+
+    // *------------------------------------------
+    // *GEHT -------------
+    const addToWishlist = () => {
+        axios
+            .post(
+                "http://localhost:3001/api/user/favorites",
+                { userObjId: userId, productObjId: oneData._id },
+                {
+                    headers: {
+                        token,
+                    },
+                }
+            )
+            .then(() => {
+                axios
+                    .get("http://localhost:3001/api/user/favorites", {
+                        headers: { token, userId },
+                    })
+                    .then((res) => {
+                        setFavoritesItem(res.data);
+                    });
+            });
+    };
+
+    // *------------------------------------------
+    // *GEHT -------------
+    const deleteFromWishlist = () => {
+        console.log("delete");
+        axios
+            .delete("http://localhost:3001/api/user/favorites/", {
+                data: { userObjId: userId, productObjId: oneData._id },
+                headers: {
+                    token,
+                },
+            })
+            .then(() => {
+                axios
+                    .get("http://localhost:3001/api/user/favorites", {
+                        headers: { token, userId },
+                    })
+                    .then((res) => {
+                        setFavoritesItem(res.data);
+                    });
+            });
+    };
     return (
         <>
             {loading && (
@@ -22,14 +75,24 @@ const DetailPage = () => {
                 <section className="detailPage-Sec">
                     <figure>
                         <img src={oneData.Bild.convertedImage} alt="" />
-                        <figcaption>
-                            <NavLink className="btn-primary" id="btn" to="/">
-                                Bearbeiten
-                            </NavLink>
-                            <NavLink className="btn-primary" id="btn1" to="/">
-                                Verkauft
-                            </NavLink>
-                        </figcaption>
+                        {userId === oneData.userObjId && (
+                            <figcaption>
+                                <NavLink
+                                    className="btn-primary"
+                                    id="btn"
+                                    to="/"
+                                >
+                                    Bearbeiten
+                                </NavLink>
+                                <NavLink
+                                    className="btn-primary"
+                                    id="btn1"
+                                    to="/"
+                                >
+                                    Verkauft
+                                </NavLink>
+                            </figcaption>
+                        )}
                     </figure>
                     <div className="detailText">
                         <h2>{oneData.Titel}</h2>
@@ -51,11 +114,22 @@ const DetailPage = () => {
                             <p>Auf Lager</p>
                             <span>{oneData.Anzahl}</span>
                         </div>
-                        <div className="button">
-                            <NavLink className="btn-primary" id="btn1" to="/">
-                                Auf die Wunschliste
-                            </NavLink>
-                        </div>
+                        {token &&
+                            (favoritesItem.includes(oneData._id) ? (
+                                <button
+                                    onClick={deleteFromWishlist}
+                                    className="btn-primary delete-btn"
+                                >
+                                    Von der Wunschliste entfernen
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={addToWishlist}
+                                    className="btn-primary wishlist-btn"
+                                >
+                                    Auf die Wunschliste
+                                </button>
+                            ))}
                         <div>
                             <h3>Produktbeschreibung</h3>
                             <p>{oneData.Beschreibung}</p>

@@ -6,13 +6,14 @@ import Footer from "../../components/footer/Footer";
 import FooterEnd from "../../components/footerEnd/FooterEnd";
 import Marktlist from "./Marktlist";
 import { useContext, useEffect, useState } from "react";
-import { newToken } from "../../App";
+import { newToken, favorite } from "../../App";
 
 // Hooks
 import useSearchItems from "../../hooks/useSearchItems";
 import useDataFetch from "../../hooks/useDatafetch";
 
 const Marktplatz = () => {
+    const { favoritesItem, setFavoritesItem } = useContext(favorite);
     const { token } = useContext(newToken);
     const { data, loading } = useDataFetch();
     const [filteredArr, setFilteredArr] = useState(data);
@@ -137,6 +138,7 @@ const Marktplatz = () => {
         filterRating,
         filterPrice,
         filteredResults,
+        favoritesItem,
     ]);
     return (
         <>

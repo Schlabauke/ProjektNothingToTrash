@@ -7,6 +7,7 @@ import Marktlist from "../marktplatz/Marktlist";
 
 import useSearchItems from "../../hooks/useSearchItems";
 import useDataFetch from "../../hooks/useDatafetch";
+import { BiLoaderCircle } from "react-icons/bi";
 let array = [];
 const Wishlist = () => {
     const [test, setTest] = useState();
@@ -25,7 +26,6 @@ const Wishlist = () => {
                 }
             });
         });
-        console.log(array);
     });
     // * GEHT---------------------------------------------------
     // Zustand Counter
@@ -131,6 +131,7 @@ const Wishlist = () => {
         filterRating,
         filterPrice,
         filteredResults,
+        favoritesItem,
     ]);
     return (
         <section className="wunschliste-Sec">
@@ -162,7 +163,13 @@ const Wishlist = () => {
                     countZustandGebraucht={countZustandGebraucht}
                     countZustandDefekt={countZustandDefekt}
                 />
-                {loading && <div>Loading</div>}
+                {loading && (
+                    <div className="loading-Div">
+                        <h2>
+                            <BiLoaderCircle className="circle" />
+                        </h2>
+                    </div>
+                )}
                 {!loading && <Marktlist loading={loading} data={filteredArr} />}
             </article>
         </section>
