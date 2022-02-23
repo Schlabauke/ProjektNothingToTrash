@@ -58,7 +58,6 @@ const MarktplatzItem = (props) => {
                 });
             });
         }
-        console.log(favoritesItem);
     }, []);
 
     return (

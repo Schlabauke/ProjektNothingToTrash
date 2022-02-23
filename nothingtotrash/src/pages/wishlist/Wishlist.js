@@ -1,6 +1,6 @@
 import AsideFilter from "../../components/asideFilter/AsideFilter";
 import { useContext, useState, useEffect } from "react";
-import { newToken, newUserId } from "../../App";
+import { newToken, newUserId, favorite } from "../../App";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import Marktlist from "../marktplatz/Marktlist";
@@ -9,12 +9,23 @@ import useSearchItems from "../../hooks/useSearchItems";
 import useDataFetch from "../../hooks/useDatafetch";
 
 const Wishlist = () => {
+    let array = [];
     const { userId } = useContext(newUserId);
-
     const { token } = useContext(newToken);
     const { data, loading } = useDataFetch();
+    const { favoritesItem } = useContext(favorite);
     const [filteredArr, setFilteredArr] = useState(data);
-    console.log(data);
+    const [filteredArrByFavs, setFilteredArrByFavs] = useState([]);
+    // data.forEach((item) => {
+    //     favoritesItem.forEach((itemFavs) => {
+    //         if (item._id === itemFavs) {
+    //             console.log(item._id);
+    //             console.log(itemFavs);
+    //         }
+    //     });
+    // });
+    // console.log(filteredArrByFavs);
+    useEffect(() => {});
     // * GEHT---------------------------------------------------
     // Zustand Counter
     let countZustandNeu = data.reduce((n, x) => n + (x.Zustand === "neu"), 0);
@@ -69,16 +80,15 @@ const Wishlist = () => {
     const { searchItems, filteredResults } = useSearchItems(data);
 
     useEffect(() => {
-        axios
-            .get("http://localhost:3001/api/user/favorites", {
-                headers: { token, userId },
-            })
-            .then((res) => {
-                console.log(res.data);
+        array.length = 0;
+        data.forEach((e) => {
+            favoritesItem.forEach((item) => {
+                if (e._id == item) {
+                    array.push(e);
+                }
             });
-    }, []); //DatenArray kommt an von den Favoriten :)
+        });
 
-    useEffect(() => {
         // * GEHT-----------------
         // Zustand
 
