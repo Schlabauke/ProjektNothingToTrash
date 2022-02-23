@@ -17,7 +17,7 @@ const AddProduct = () => {
     const [Lieferung, setLieferung] = useState(true);
     const [Titel, setTitel] = useState("");
     const [Beschreibung, setBeschreibung] = useState("");
-    const [Anzahl, setAnzahl] = useState(0);
+    const [Anzahl, setAnzahl] = useState(1);
     const [Preis, setPreis] = useState(0);
     const [Festpreis, setFestpreis] = useState(true);
     const festpreisFunction = () => {
@@ -39,8 +39,8 @@ const AddProduct = () => {
     };
     const [Bild, setBild] = useState("");
     const [Kategorie, setKategorie] = useState("");
-    const [PLZ, setPlz] = useState(0);
-    const [Ort, setOrt] = useState(0);
+    const [PLZ, setPlz] = useState(NaN);
+    const [Ort, setOrt] = useState("");
     const [Strasse, setStrasse] = useState("");
     const [Name, setName] = useState("");
     const [Telefonnummer, setTelefonnummer] = useState(0);
@@ -51,9 +51,9 @@ const AddProduct = () => {
             let convertedImage = {};
             convertedImage = await Convert(Bild);
             const headers = {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-              }
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            };
             const newProduct = {
                 AnzeigenTyp,
                 Zustand,
@@ -73,17 +73,17 @@ const AddProduct = () => {
                 Name,
                 Telefonnummer,
                 userObjId,
-                
             };
-            console.log('aus add - frontend',newProduct);
+            console.log("aus add - frontend", newProduct);
             //fetch
             axios
                 .post(
                     "http://localhost:3001/api/products/addProduct/",
-                    newProduct,{
+                    newProduct,
+                    {
                         headers: {
-                            token
-                        }
+                            token,
+                        },
                     }
                 )
                 .then(() => {
@@ -279,6 +279,8 @@ const AddProduct = () => {
                         <input
                             onChange={(e) => setPlz(e.target.value)}
                             type="number"
+                            min="0"
+                            className="hideArrows"
                             name="PLZ"
                             value={Number(PLZ)}
                         />

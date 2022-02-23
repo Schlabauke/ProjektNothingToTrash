@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { BiLoaderCircle } from "react-icons/bi";
+
 import AsideFilter from "../../components/asideFilter/AsideFilter";
 import Footer from "../../components/footer/Footer";
 import FooterEnd from "../../components/footerEnd/FooterEnd";
@@ -174,7 +176,13 @@ const Marktplatz = () => {
                         countZustandGebraucht={countZustandGebraucht}
                         countZustandDefekt={countZustandDefekt}
                     />
-                    {loading && <div>Loading</div>}
+                    {loading && (
+                        <div className="loading-Div">
+                            <h2>
+                                <BiLoaderCircle className="circle" />
+                            </h2>
+                        </div>
+                    )}
                     {!loading && (
                         <Marktlist loading={loading} data={filteredArr} />
                     )}

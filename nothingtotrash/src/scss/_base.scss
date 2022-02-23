@@ -51,7 +51,14 @@ body {
         rgba(229, 239, 255, 0) 100vh
     );
 }
-
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
 a {
     text-decoration: none;
     color: $basicDarkFont;
