@@ -58,7 +58,6 @@ const MarktplatzItem = props => {
 				});
 			});
 		}
-		console.log(favoritesItem);
 	}, []);
 
 	return (
@@ -66,7 +65,13 @@ const MarktplatzItem = props => {
 			{/* <button onClick={fav}>Favorites</button> */}
 			<img src={props.Bild} alt={props.Titel} />
 			<div className='text'>
-				<h4>{props.Preis} EUR</h4>
+				{props.Festpreis ? (
+					<h4>{props.Preis}EUR</h4>
+				) : props.VB ? (
+					<h4>{props.Preis}EUR VB</h4>
+				) : (
+					<h4>Zu Verschenken</h4>
+				)}
 				<h4>{props.Titel}</h4>
 				<p>{props.Beschreibung}</p>
 				<div>
@@ -82,6 +87,13 @@ const MarktplatzItem = props => {
 				<NavLink className='btn-primary' to={`/details/${props.id}`}>
 					Details
 				</NavLink>
+				{/* <label name="Auf die Wunschliste">
+                    <input
+                        onChange={wunschListe}
+                        type="checkbox"
+                        name="Auf die Wunschliste"
+                    />
+                    Auf die Wunschliste */}
 				{token && (
 					<label name='Auf die Wunschliste'>
 						<input

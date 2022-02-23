@@ -3,6 +3,7 @@ import FooterEnd from "../../components/footerEnd/FooterEnd";
 
 import { useParams } from "react-router-dom";
 import useDataFetch from "../../hooks/useDatafetch";
+import { BiLoaderCircle } from "react-icons/bi";
 
 const DetailPage = () => {
     let { id } = useParams();
@@ -10,7 +11,13 @@ const DetailPage = () => {
     let oneData = data.filter((e) => e._id === id)[0];
     return (
         <>
-            {loading && <div>Loading</div>}
+            {loading && (
+                <div className="loading-Div">
+                    <h2>
+                        <BiLoaderCircle className="circle" />
+                    </h2>
+                </div>
+            )}
             {!loading && (
                 <section className="detailPage-Sec">
                     <figure>

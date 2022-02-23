@@ -1,9 +1,17 @@
+import { BiLoaderCircle } from "react-icons/bi";
+
 import MarktplatzItem from "./MarktplatzItem";
 
 const Marktlist = props => {
 	return (
 		<div className='marktlist'>
-			{props.loading && <div>Loading</div>}
+			{props.loading && (
+				<div className='loading-Div'>
+					<h2>
+						<BiLoaderCircle className='circle' />
+					</h2>
+				</div>
+			)}
 			{!props.loading &&
 				props.data.map((e, i) => (
 					<MarktplatzItem
@@ -16,6 +24,8 @@ const Marktlist = props => {
 						Zustand={e.Zustand}
 						Lieferung={e.Lieferung}
 						Anzahl={e.Anzahl}
+						Festpreis={e.Festpreis}
+						VB={e.VB}
 					/>
 				))}
 		</div>

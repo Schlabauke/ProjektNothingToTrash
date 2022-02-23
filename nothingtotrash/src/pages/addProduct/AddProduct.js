@@ -17,7 +17,7 @@ const AddProduct = () => {
 	const [Lieferung, setLieferung] = useState(true);
 	const [Titel, setTitel] = useState("");
 	const [Beschreibung, setBeschreibung] = useState("");
-	const [Anzahl, setAnzahl] = useState(0);
+	const [Anzahl, setAnzahl] = useState(1);
 	const [Preis, setPreis] = useState(0);
 	const [Festpreis, setFestpreis] = useState(true);
 	const festpreisFunction = () => {
@@ -39,8 +39,8 @@ const AddProduct = () => {
 	};
 	const [Bild, setBild] = useState("");
 	const [Kategorie, setKategorie] = useState("");
-	const [PLZ, setPlz] = useState(0);
-	const [Ort, setOrt] = useState(0);
+	const [PLZ, setPlz] = useState(NaN);
+	const [Ort, setOrt] = useState("");
 	const [Strasse, setStrasse] = useState("");
 	const [Name, setName] = useState("");
 	const [Telefonnummer, setTelefonnummer] = useState(0);
@@ -82,7 +82,8 @@ const AddProduct = () => {
 						token,
 					},
 				})
-				.then(() => {
+				.then(res => {
+					console.log(res);
 					navigate("/marktplatz");
 					console.log("Produkt wurde hinzugefügt");
 				})
@@ -271,6 +272,8 @@ const AddProduct = () => {
 						<input
 							onChange={e => setPlz(e.target.value)}
 							type='number'
+							min='0'
+							className='hideArrows'
 							name='PLZ'
 							value={Number(PLZ)}
 						/>
