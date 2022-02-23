@@ -44,6 +44,9 @@ const Ueberuns = () => {
                 <div className="picture">
                     <img src="https://cdn.pixabay.com/photo/2014/07/30/08/50/earth-405096_1280.jpg" alt="" />
                 </div>
+                <div className="team">
+                    <h2>NothingToTrash Team</h2>
+                </div>
             </section>
 
             <section className="card">
@@ -57,7 +60,7 @@ const Ueberuns = () => {
                     </p>
                 </div>
                 <div className="player " >
-                    <img className="red" src="https://www.pokewiki.de/images/thumb/4/48/Sugimori_006m2.png/250px-Sugimori_006m2.png" alt="" />
+                    <img className="red" id="player1" src="https://www.pokewiki.de/images/thumb/4/48/Sugimori_006m2.png/250px-Sugimori_006m2.png" alt="" />
                     <h2>
                         Akhim Frondend Developer
                     </h2>
@@ -80,12 +83,12 @@ const Ueberuns = () => {
                         Semir Backend Developer
                     </h2>
                     <p>
-                        Woingenau ist ein mittelgroßes, vierbeiniges Pokémon, das himmelblau und schwarz erscheint. Bis auf den schwarzen Schwanz ist der gesamte Körper himmelblau gefärbt. Während der Kopf und der Oberkörper gleich breit sind, wird Woingenau von der Taille abwärts bis zu den Füßen immer schmaler. Der Hinterkopf wächst dabei etwas weiter nach unten. Das Gesicht des Psycho-Pokémon wird von dem großen Mund dominiert. Der Mund hat dabei ein Zick-Zack-Muster. Bei weiblichen Woingenau sind dabei deutlich rot gefärbte Lippen erkennbar. Die Augen hält es stets geschlossen. Die langen Arme wachsen seitlich des Brustbereiches und haben eine rechteckige Gestalt. Das Pokémon steht auf vier runden, kleinen Füßen, die direkt an den Unterkörper anschließen. Schließlich ist hinten ein dicker Schwanz zu erkennen, auf dem sich zwei Augen befinden. Diese bestehen wiederum aus weißer Lederhaut und kleinen, schwarzen Pupillen.
+                        Woingenau ist ein mittelgroßes, vierbeiniges Pokémon, das himmelblau und schwarz erscheint. Bis auf den schwarzen Schwanz ist der gesamte Körper himmelblau gefärbt. Während der Kopf und der Oberkörper gleich breit sind, wird Woingenau von der Taille abwärts bis zu den Füßen immer schmaler. Der Hinterkopf wächst dabei etwas weiter nach unten. Das Gesicht des Psycho-Pokémon wird von dem großen Mund dominiert. Der Mund hat dabei ein Zick-Zack-Muster. Bei weiblichen Woingenau sind dabei deutlich rot gefärbte Lippen erkennbar. Die Augen hält es stets geschlossen. Die langen Arme wachsen seitlich des Brustbereiches und haben eine rechteckige Gestalt. 
                     </p>
                 </div>
             </section>
             <Footer />
-            <FooterEnd />
+            <FooterEnd />        
         </>
     );
 };
