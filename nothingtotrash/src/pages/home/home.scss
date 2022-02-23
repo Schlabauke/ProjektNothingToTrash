@@ -121,7 +121,7 @@
 }
 
 // ################################################################################
-// ################################# MediaQueries IPad Air #################################
+// ################################# MediaQueries IPad Air ########################
 // ################################################################################
 
 @media only screen and (max-width: 820px) {
@@ -209,11 +209,10 @@
         }
     }
     .picsGrid-Art {
-        display: grid;
-        grid-template-columns: 1fr;
+        display: block;
+       text-align: center;
         padding: 0 2%;
     .art1{
-        grid-column: 1/4;
         margin: 0 auto;
     }
         h2 {
@@ -228,16 +227,17 @@
             }
             h3 {
                 font-size: 1.4rem;
-                line-height: 1.5rem;
+                text-align: center;
             }
             p {
-                width: 80%;
+                text-align: center;
+                width: 65%;
                 font-size: 1.1rem;
             }
         }
     }
     .blueBack-Art {
-        padding: -35% 15%;
+        padding: -15% 15%;
         margin: 12% 0;
         .blueBackFlex-Div {
             &:nth-of-type(2) {
@@ -278,7 +278,7 @@
         }
         p {
             display: block;
-            width: 40%;
+            width: 50%;
             margin: 0 auto;
         }
         img {
