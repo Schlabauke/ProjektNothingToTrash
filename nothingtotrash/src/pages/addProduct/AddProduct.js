@@ -86,7 +86,8 @@ const AddProduct = () => {
                         },
                     }
                 )
-                .then(() => {
+                .then((res) => {
+                    console.log(res);
                     navigate("/marktplatz");
                     console.log("Produkt wurde hinzugefügt");
                 })

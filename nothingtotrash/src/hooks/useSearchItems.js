@@ -6,7 +6,7 @@ const useSearchItems = (data) => {
         setFilteredResults(data);
     }, [data]);
     const searchItems = (searchValue) => {
-        if (searchValue !== null) {
+        if (searchValue.length >= 0) {
             const filteredData = data.filter((item) => {
                 return Object.values(item)
                     .join("")
