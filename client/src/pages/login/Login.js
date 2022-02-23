@@ -17,7 +17,7 @@ const Login = () => {
 
 //Fetch zum ersten mal alle Favoriten
     useEffect(() => {
-        axios.get("http://localhost:3001/api/user/favorites", {
+        axios.get("/api/user/favorites", {
             headers:{token, userId}
         })
         .then((res)=>{setFavoritesItem(res.data)})
@@ -37,7 +37,7 @@ const Login = () => {
             password,
         };
         axios
-            .post("http://localhost:3001/api/users/login", {
+            .post("/api/users/login", {
                 email: user.email,
                 password: user.password,
             })

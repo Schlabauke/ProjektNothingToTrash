@@ -79,7 +79,7 @@ const AddProduct = () => {
             //fetch
             axios
                 .post(
-                    "http://localhost:3001/api/products/addProduct/",
+                    "/api/products/addProduct/",
                     newProduct,{
                         headers: {
                             token
@@ -100,11 +100,7 @@ const AddProduct = () => {
 
     return (
         <section className="addProduct-Sec">
-            <form
-            /* method="post"
-                action="http://localhost:3001/api/products/addProduct/"
-                encType="multipart/form-data" */
-            >
+            <form>
                 {/*  Anzeigentyp */}
                 <div className="formWrap-Div">
                     <p>Anzeigentyp:</p>

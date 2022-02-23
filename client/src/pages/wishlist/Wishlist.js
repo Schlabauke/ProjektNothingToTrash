@@ -70,7 +70,7 @@ const Wishlist = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:3001/api/user/favorites", {
+            .get("/api/user/favorites", {
                 headers: { token, userId },
             })
             .then((res) => {

@@ -17,7 +17,7 @@ const MarktplatzItem = (props) => {
         if(checkBox){
             console.log("checked");
            axios.
-           post("http://localhost:3001/api/user/favorites",
+           post("/api/user/favorites",
             {userObjId:userId, productObjId:productId},
             {  headers:{
                 token
@@ -27,7 +27,7 @@ const MarktplatzItem = (props) => {
         }
       else{
             console.log("unchecked");
-             axios.delete("http://localhost:3001/api/user/favorites/",
+             axios.delete("/api/user/favorites/",
              {data:{userObjId:userId, productObjId:productId},
                 headers:{
                 token
@@ -36,7 +36,7 @@ const MarktplatzItem = (props) => {
      }
      
      //Fetch für einen neuen State der Favoriten
-     axios.get("http://localhost:3001/api/user/favorites", {
+     axios.get("/api/user/favorites", {
             headers:{token, userId}
         })
         .then((res)=>{setFavoritesItem(res.data)})

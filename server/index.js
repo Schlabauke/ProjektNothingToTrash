@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require('jsonwebtoken')
+const path = require('path')
 //import functions
 const { registerUser } = require("./services/registerUser");
 const { LoginUser } = require("./services/loginUser");
@@ -125,8 +126,9 @@ findOneUser(id)
 })
 })
 
-
-const PORT = 3001;
+app.use('/',express.static(path.join(__dirname,'../client/build')))
+app.use('*',express.static(path.join(__dirname,'../client/build')))
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log("Listening on Port,", PORT));
 
 
