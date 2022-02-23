@@ -88,7 +88,7 @@ app.post("/api/user/favorites", verifyToken, (req, res) => {
 app.delete("/api/user/favorites", verifyToken, (req, res) => {
 	console.log("Delete Route");
 	const productObjId = req.body.productObjId;
-	const userObjId = req.userObjId;
+	const userObjId = req.body.userObjId;
 	console.log("delete Nudel:", userObjId, productObjId);
 	deleteFavorite(userObjId, productObjId)
 		.then(deleteFavorite => {
