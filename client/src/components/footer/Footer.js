@@ -10,7 +10,7 @@ const Footer = () => {
             <NavLink className="btn-primary" to="/register">
                 Registriere Dich
             </NavLink>
-            <img src="img/ring.png" alt="Twitter" className="ring" />
+            <img src="/img/ring.png" alt="Twitter" className="ring" />
         </footer>
     );
 };

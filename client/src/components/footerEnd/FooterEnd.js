@@ -14,7 +14,7 @@ const FooterEnd = () => {
                 <img src="/img/Union.png" alt="zu" className="last" />
             </a>
             <a href="http://www.instragram.de" className="logo">
-                <img src="/img/Instragram.png" alt="zu" className="last" />
+                <img src="/img/instragram.png" alt="zu" className="last" />
             </a>
             <div>
                 <p>
