@@ -3,6 +3,13 @@
     background-size: 100%;
     padding: 0 0 10% 0;
     margin: 10% 0 0 0;
+    .warning {
+        color: red;
+        font-size: 3rem;
+        position: fixed;
+        top: 5vh;
+        left: 25vw;
+    }
     form {
         .formWrap-Div {
             width: 65%;
