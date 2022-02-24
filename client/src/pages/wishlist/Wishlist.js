@@ -1,20 +1,32 @@
 import AsideFilter from "../../components/asideFilter/AsideFilter";
 import { useContext, useState, useEffect } from "react";
-import { newToken, newUserId } from "../../App";
+import { newToken, newUserId, favorite } from "../../App";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import Marktlist from "../marktplatz/Marktlist";
 
 import useSearchItems from "../../hooks/useSearchItems";
 import useDataFetch from "../../hooks/useDatafetch";
-
+import { BiLoaderCircle } from "react-icons/bi";
+let array = [];
 const Wishlist = () => {
+    const [test, setTest] = useState();
     const { userId } = useContext(newUserId);
-
+    const { favoritesItem, setFavoritesItem } = useContext(favorite);
     const { token } = useContext(newToken);
     const { data, loading } = useDataFetch();
     const [filteredArr, setFilteredArr] = useState(data);
-    console.log(data);
+
+    useEffect(() => {
+        array.length = 0;
+        data.forEach((e) => {
+            favoritesItem.forEach((item) => {
+                if (e._id == item) {
+                    array.push(e);
+                }
+            });
+        });
+    });
     // * GEHT---------------------------------------------------
     // Zustand Counter
     let countZustandNeu = data.reduce((n, x) => n + (x.Zustand === "neu"), 0);
@@ -66,17 +78,7 @@ const Wishlist = () => {
 
     // * GEHT-----------------
     // Searchbar
-    const { searchItems, filteredResults } = useSearchItems(data);
-
-    useEffect(() => {
-        axios
-            .get("/api/user/favorites", {
-                headers: { token, userId },
-            })
-            .then((res) => {
-                console.log(res.data);
-            });
-    }, []); //DatenArray kommt an von den Favoriten :)
+    const { searchItems, filteredResults } = useSearchItems(array);
 
     useEffect(() => {
         // * GEHT-----------------
@@ -129,11 +131,13 @@ const Wishlist = () => {
         filterRating,
         filterPrice,
         filteredResults,
+        favoritesItem,
     ]);
     return (
         <section className="wunschliste-Sec">
             <article className="productsHeader-Art">
                 <h1>Diese Artikel hättest du gerne</h1>
+                {/* <button onClick={testNew}>Test</button> */}
                 <input
                     onChange={(e) => searchItems(e.target.value)}
                     type="text"
@@ -159,7 +163,13 @@ const Wishlist = () => {
                     countZustandGebraucht={countZustandGebraucht}
                     countZustandDefekt={countZustandDefekt}
                 />
-                {loading && <div>Loading</div>}
+                {loading && (
+                    <div className="loading-Div">
+                        <h2>
+                            <BiLoaderCircle className="circle" />
+                        </h2>
+                    </div>
+                )}
                 {!loading && <Marktlist loading={loading} data={filteredArr} />}
             </article>
         </section>

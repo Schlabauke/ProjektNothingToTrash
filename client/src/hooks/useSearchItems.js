@@ -1,8 +1,10 @@
-import { useState } from "react";
-//data ist beim Laden der Page leer
+import { useEffect, useState } from "react";
+
 const useSearchItems = (data) => {
     const [filteredResults, setFilteredResults] = useState(data);
-
+    useEffect(() => {
+        setFilteredResults(data);
+    }, [data]);
     const searchItems = (searchValue) => {
         if (searchValue.length >= 0) {
             const filteredData = data.filter((item) => {

@@ -13,6 +13,34 @@ buttons / navbars / popups / ...
     margin: 2% 0;
     display: inline-block;
 }
+.wishlist-btn {
+    background-color: $formBackground-light;
+    color: $basicDarkFont;
+    border: none;
+    transition: all 0.2s;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+.delete-btn {
+    background-color: $deleteBtn;
+    color: $basicWhite;
+    border: none;
+    transition: all 0.2s;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+.loading-Div {
+    margin: 10% auto;
+    text-align: center;
+    .circle {
+        transform: scale(1);
+        transform-origin: center center;
+        animation: rotation 5s linear infinite;
+    }
+}
+
 .productsHeader-Art {
     text-align: center;
     margin: 10% 0 5% 0;
@@ -157,6 +185,7 @@ aside {
         }
     }
 }
+
 @media only screen and (max-width: 900px) {
     .productsHeader-Art {
         h1 {

@@ -1,69 +1,71 @@
 import { NavLink } from "react-router-dom";
-import  axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { newUserId , newToken, favorite} from "../../App";
+import axios from "axios";
+import { newUserId, newToken, favorite } from "../../App";
 import { useContext, useState, useEffect } from "react";
-let ArrayFavorites =[]
 const MarktplatzItem = (props) => {
-    const [toggle, setToggle] = useState(false)
-    const { favoritesItem, setFavoritesItem} = useContext(favorite)
-    const { userId, setUserId } = useContext(newUserId)
-    const { token, setToken } = useContext(newToken)
-   const productId = props.id
-    const navigate = useNavigate();
-    const wunschListe = (e) =>{
-        console.log('ProductId', productId);
-        const checkBox = e.target.checked
-        if(checkBox){
-            console.log("checked");
-           axios.
-           post("/api/user/favorites",
-            {userObjId:userId, productObjId:productId},
-            {  headers:{
-                token
-            }}
-         )
-         
-        }
-      else{
-            console.log("unchecked");
-             axios.delete("/api/user/favorites/",
-             {data:{userObjId:userId, productObjId:productId},
-                headers:{
-                token
-            }})
-           
-     }
-     
-     //Fetch für einen neuen State der Favoriten
-     axios.get("/api/user/favorites", {
-            headers:{token, userId}
-        })
-        .then((res)=>{setFavoritesItem(res.data)})
-    }    
-    
-   //Fetch für die Checkboxes (Favoriten)
-
-        useEffect(() => { 
-            const checkboxes = document.querySelectorAll(".checkBoxes")  
-            if(favoritesItem ){
-                checkboxes.forEach(eCheck =>{
-                    favoritesItem.forEach(eState =>{
-                        if(eCheck.value == eState){
-                            eCheck.checked = true
-                        } 
+    const [toggle, setToggle] = useState(false);
+    const { favoritesItem, setFavoritesItem } = useContext(favorite);
+    const { userId } = useContext(newUserId);
+    const { token } = useContext(newToken);
+    const productId = props.id;
+    // *------------------------------------------
+    // *GEHT -------------
+    const addToWishlist = () => {
+        axios
+            .post(
+                "/api/user/favorites",
+                { userObjId: userId, productObjId: productId },
+                {
+                    headers: {
+                        token,
+                    },
+                }
+            )
+            .then(() => {
+                axios
+                    .get("/api/user/favorites", {
+                        headers: { token, userId },
                     })
-                 })
-            }
-    console.log(favoritesItem)
-      },[]);
-   
+                    .then((res) => {
+                        setFavoritesItem(res.data);
+                    });
+            });
+    };
+
+    // *------------------------------------------
+    // *GEHT -------------
+    const deleteFromWishlist = () => {
+        console.log("delete");
+        axios
+            .delete("/api/user/favorites/", {
+                data: { userObjId: userId, productObjId: productId },
+                headers: {
+                    token,
+                },
+            })
+            .then(() => {
+                axios
+                    .get("/api/user/favorites", {
+                        headers: { token, userId },
+                    })
+                    .then((res) => {
+                        setFavoritesItem(res.data);
+                    });
+            });
+    };
+
     return (
         <div className="marktplatzitem">
             {/* <button onClick={fav}>Favorites</button> */}
             <img src={props.Bild} alt={props.Titel} />
             <div className="text">
-                <h4>{props.Preis} EUR</h4>
+                {props.Festpreis ? (
+                    <h4>{props.Preis}EUR</h4>
+                ) : props.VB ? (
+                    <h4>{props.Preis}EUR VB</h4>
+                ) : (
+                    <h4>Zu Verschenken</h4>
+                )}
                 <h4>{props.Titel}</h4>
                 <p>{props.Beschreibung}</p>
                 <div>
@@ -79,15 +81,25 @@ const MarktplatzItem = (props) => {
                 <NavLink className="btn-primary" to={`/details/${props.id}`}>
                     Details
                 </NavLink>
-                {token && (
-                <label name='Auf die Wunschliste'>
-                <input onChange={wunschListe} type="checkbox" className="checkBoxes" name='Auf die Wunschliste' value={props.id}/>
-                Auf die Wunschliste 
-                </label>
-                )}
+                {token &&
+                    (props.fav ? (
+                        <button
+                            onClick={deleteFromWishlist}
+                            className="btn-primary delete-btn"
+                        >
+                            Von der Wunschliste entfernen
+                        </button>
+                    ) : (
+                        <button
+                            onClick={addToWishlist}
+                            className="btn-primary wishlist-btn"
+                        >
+                            Auf die Wunschliste
+                        </button>
+                    ))}
             </div>
         </div>
-    ); 
+    );
 };
 
 export default MarktplatzItem;

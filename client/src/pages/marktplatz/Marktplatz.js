@@ -1,16 +1,19 @@
 import { NavLink } from "react-router-dom";
+import { BiLoaderCircle } from "react-icons/bi";
+
 import AsideFilter from "../../components/asideFilter/AsideFilter";
 import Footer from "../../components/footer/Footer";
 import FooterEnd from "../../components/footerEnd/FooterEnd";
 import Marktlist from "./Marktlist";
 import { useContext, useEffect, useState } from "react";
-import { newToken } from "../../App";
+import { newToken, favorite } from "../../App";
 
 // Hooks
 import useSearchItems from "../../hooks/useSearchItems";
 import useDataFetch from "../../hooks/useDatafetch";
 
 const Marktplatz = () => {
+    const { favoritesItem, setFavoritesItem } = useContext(favorite);
     const { token } = useContext(newToken);
     const { data, loading } = useDataFetch();
     const [filteredArr, setFilteredArr] = useState(data);
@@ -34,7 +37,7 @@ const Marktplatz = () => {
     // filter function
 
     // * GEHT-----------------
-    // Zustand
+    // * Zustand
     const [filterStatus, setFilterStatus] = useState([]);
     const insertStatusInState = (status) => {
         if (filterStatus.includes(status)) {
@@ -44,7 +47,7 @@ const Marktplatz = () => {
         }
     };
     // * GEHT-----------------
-    // Lieferung
+    // * Lieferung
     const [filterShipping, setFilterShipping] = useState("");
     const insertLieferungInState = (status) => {
         if (filterShipping.includes(status)) {
@@ -54,7 +57,7 @@ const Marktplatz = () => {
         }
     };
     // * GEHT-----------------
-    // Rating
+    // * Rating
     const [filterRating, setFilterRating] = useState([]);
     const insertRatingInState = (status) => {
         if (filterRating.includes(status)) {
@@ -65,11 +68,11 @@ const Marktplatz = () => {
     };
 
     // * GEHT-----------------
-    // Preis
+    // * Preis
     const [filterPrice, setFilterPrice] = useState([0, 500]);
 
     // * GEHT-----------------
-    // Searchbar
+    // * Searchbar
     const { searchItems, filteredResults } = useSearchItems(data);
 
     useEffect(() => {
@@ -135,6 +138,7 @@ const Marktplatz = () => {
         filterRating,
         filterPrice,
         filteredResults,
+        favoritesItem,
     ]);
     return (
         <>
@@ -174,7 +178,13 @@ const Marktplatz = () => {
                         countZustandGebraucht={countZustandGebraucht}
                         countZustandDefekt={countZustandDefekt}
                     />
-                    {loading && <div>Loading</div>}
+                    {loading && (
+                        <div className="loading-Div">
+                            <h2>
+                                <BiLoaderCircle className="circle" />
+                            </h2>
+                        </div>
+                    )}
                     {!loading && (
                         <Marktlist loading={loading} data={filteredArr} />
                     )}

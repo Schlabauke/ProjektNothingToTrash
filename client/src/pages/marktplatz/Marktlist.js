@@ -1,9 +1,22 @@
+import { useContext, useState } from "react";
+import { BiLoaderCircle } from "react-icons/bi";
+import { favorite, newUserId, fav } from "../../App";
+
 import MarktplatzItem from "./MarktplatzItem";
 
 const Marktlist = (props) => {
+    const { userId } = useContext(newUserId);
+    const { favoritesItem, setFavoritesItem } = useContext(favorite);
+
     return (
         <div className="marktlist">
-            {props.loading && <div>Loading</div>}
+            {props.loading && (
+                <div className="loading-Div">
+                    <h2>
+                        <BiLoaderCircle className="circle" />
+                    </h2>
+                </div>
+            )}
             {!props.loading &&
                 props.data.map((e, i) => (
                     <MarktplatzItem
@@ -16,6 +29,9 @@ const Marktlist = (props) => {
                         Zustand={e.Zustand}
                         Lieferung={e.Lieferung}
                         Anzahl={e.Anzahl}
+                        Festpreis={e.Festpreis}
+                        VB={e.VB}
+                        fav={favoritesItem.includes(e._id)}
                     />
                 ))}
         </div>
