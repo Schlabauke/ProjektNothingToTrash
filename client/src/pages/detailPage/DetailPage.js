@@ -102,7 +102,6 @@ const DetailPage = () => {
                         ) : (
                             <h3>Zu Verschenken</h3>
                         )}
-
                         <div className="describe">
                             <p>Zustand</p>
                             <span>{oneData.Zustand}</span>

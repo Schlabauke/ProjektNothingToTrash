@@ -59,6 +59,7 @@ const MarktplatzItem = (props) => {
             {/* <button onClick={fav}>Favorites</button> */}
             <img src={props.Bild} alt={props.Titel} />
             <div className="text">
+            <h3>{props.Titel}</h3>
                 {props.Festpreis ? (
                     <h4>{props.Preis}EUR</h4>
                 ) : props.VB ? (
@@ -66,8 +67,6 @@ const MarktplatzItem = (props) => {
                 ) : (
                     <h4>Zu Verschenken</h4>
                 )}
-                <h4>{props.Titel}</h4>
-                <p>{props.Beschreibung}</p>
                 <div>
                     <p>Zustand</p>
                     <span>{props.Zustand}</span>
