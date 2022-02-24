@@ -44,7 +44,6 @@ const DetailPage = () => {
     // *------------------------------------------
     // *GEHT -------------
     const deleteFromWishlist = () => {
-        console.log("delete");
         axios
             .delete("http://localhost:3001/api/user/favorites/", {
                 data: { userObjId: userId, productObjId: oneData._id },
@@ -62,6 +61,7 @@ const DetailPage = () => {
                     });
             });
     };
+    console.log(oneData);
     return (
         <>
             {loading && (
@@ -106,7 +106,7 @@ const DetailPage = () => {
 
                         <div className="describe">
                             <p>Zustand</p>
-                            <span>{oneData.status}</span>
+                            <span>{oneData.Zustand}</span>
                             {/* <p>Marke</p>
                         <span>{oneData.brand}</span> */}
                             <p>Lieferung</p>
