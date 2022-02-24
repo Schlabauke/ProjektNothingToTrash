@@ -105,7 +105,7 @@ const DetailPage = () => {
 
                         <div className="describe">
                             <p>Zustand</p>
-                            <span>{oneData.status}</span>
+                            <span>{oneData.Zustand}</span>
                             {/* <p>Marke</p>
                         <span>{oneData.brand}</span> */}
                             <p>Lieferung</p>
