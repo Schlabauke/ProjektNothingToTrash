@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const path = require('path')
 //import functions
 const { registerUser } = require("./services/registerUser");
 const { LoginUser } = require("./services/loginUser");
