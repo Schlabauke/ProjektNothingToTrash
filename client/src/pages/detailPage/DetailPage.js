@@ -44,7 +44,6 @@ const DetailPage = () => {
     // *------------------------------------------
     // *GEHT -------------
     const deleteFromWishlist = () => {
-        console.log("delete");
         axios
             .delete("/api/user/favorites/", {
                 data: { userObjId: userId, productObjId: oneData._id },
