@@ -1,6 +1,8 @@
 # ProjektNothingToTrash
 
-<h1> :racoon: Teamproject Nothing2Trash :racoon: </h1>
+<p color= blue> got to website : https://nothing2trash.herokuapp.com/ </p>
+
+<h1> Teamproject Nothing2Trash </h1>
 <p>”Nothingtotrash” ís a website for reselling, gift or barter used products,furniture,clothes ...</p>
 <p>This allows users to operate more sustainably and pass on objects that are still functional without unnecessarily turning them into waste.</p>
 
